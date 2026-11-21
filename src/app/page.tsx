@@ -12,7 +12,8 @@ import {
   Star,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { CeroBadge } from "@/components/CeroBadge";
+import { ClienteAIWidget } from "@/components/ClienteAIWidget";
+import { Footer } from "@/components/Footer";
 
 const features = [
   {
@@ -274,13 +275,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-tinta text-white/70">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm md:flex-row">
-          <Logo light />
-          <p>© {new Date().getFullYear()} Antojo. Hecho en México.</p>
-          <CeroBadge />
-        </div>
-      </footer>
+      <Footer />
+      <ClienteAIWidget />
     </div>
   );
 }

@@ -4,13 +4,12 @@ export function CeroBadge() {
       href="https://cero-new-generation-e19z.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-full bg-black px-3.5 py-1.5 text-xs text-white/70 ring-1 ring-white/10 hover:ring-white/30"
+      aria-label="Diseñado por Cero+"
+      className="inline-flex items-center gap-2.5 rounded-full bg-white px-4 py-2 text-sm text-tinta shadow-lg transition hover:scale-[1.03]"
     >
       Diseñado por
-      <span className="inline-flex items-center font-extrabold text-white">
-        Cer
-        <span className="mx-[1px] inline-block h-2.5 w-2.5 rounded-full bg-[#e10600]" />+
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/cero-logo.png" alt="Cero+" className="h-6 w-auto" />
     </a>
   );
 }
