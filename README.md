@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Antojo · Carta QR que vende sola
 
-## Getting Started
+Plataforma SaaS de cartas digitales con QR para restaurantes en México.
+Stack: **Next.js 16 (App Router) + Tailwind 4 + Supabase + Vercel**.
 
-First, run the development server:
+## Qué incluye este MVP
+
+| Área | Funciones |
+|---|---|
+| Sitio público `/` | Landing, funciones, cómo funciona, precios en MXN, preguntas frecuentes |
+| Cuenta `/registro` `/entrar` | Correo y contraseña o Google (Supabase Auth) |
+| Alta guiada `/onboarding` | 1) Datos del negocio, 2) Platillos, 3) QR |
+| Carta pública `/m/[slug]` | Scroll vertical tipo TikTok con fotos y videos, categorías, me gusta, compartir, carrito y pedido por WhatsApp, invitación a reseñar en Google, aviso de "cerrado" |
+| Panel `/panel` | Resumen (visitas, QR PNG/SVG, abierto/cerrado, checklist), Platillos (categorías, fotos y videos, etiquetas, agotado), Métricas (visitas por día, horas pico, platillos más vistos), Ajustes |
+
+Pestañas **Lealtad** y **Pedidos** aparecen como "Pronto" (fase 2).
+
+---
+
+## 1. Crear la base de datos en Supabase
+
+1. Entra a <https://supabase.com> y crea un proyecto nuevo (región: `us-east-1` o la más cercana).
+2. Ve a **SQL Editor → New query**, pega todo el contenido de `supabase/schema.sql` y presiona **Run**.
+   Esto crea las tablas, la seguridad (RLS) y el bucket `media` para fotos y videos.
+3. Ve a **Authentication → URL Configuration**:
+   - **Site URL**: `http://localhost:3000` (luego cámbialo por tu dominio de Vercel).
+   - **Redirect URLs**: agrega `http://localhost:3000/auth/callback` y `https://TU-DOMINIO/auth/callback`.
+4. (Opcional) **Authentication → Providers → Google** para el botón "Continuar con Google".
+5. (Recomendado para pruebas) En **Authentication → Providers → Email** puedes desactivar "Confirm email" para entrar sin confirmar el correo.
+
+## 2. Correr en tu computadora
 
 ```bash
+npm install
+cp .env.example .env.local   # en Windows: copy .env.example .env.local
+# llena NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY
+# (Supabase > Project Settings > API)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre <http://localhost:3000>, crea una cuenta y sigue el alta.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3. Subir a GitHub
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git add .
+git commit -m "Antojo MVP"
+git branch -M main
+git remote add origin https://github.com/Dimagnic/antojo.git
+git push -u origin main
+```
 
-## Learn More
+(Primero crea el repositorio vacío `antojo` en GitHub.)
 
-To learn more about Next.js, take a look at the following resources:
+## 4. Publicar en Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. En Vercel: **Add New → Project →** importa el repo `antojo`.
+2. En **Environment Variables** agrega:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SITE_URL` = `https://tu-dominio.com` (sin `/` al final; es la URL que lleva el QR)
+3. **Deploy**. Después actualiza el Site URL y Redirect URLs en Supabase con tu dominio.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> Importante: define `NEXT_PUBLIC_SITE_URL` **antes** de imprimir QRs. Si después cambias de dominio, los QR impresos dejan de apuntar a la carta.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Estructura
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    page.tsx                 Landing
+    (auth)/entrar|registro   Inicio de sesión y registro
+    auth/callback/route.ts   Regreso de Google / confirmación de correo
+    onboarding/              Alta guiada
+    panel/                   Panel del restaurante
+    m/[slug]/page.tsx        Carta pública
+    actions.ts               Server Actions (guardar negocio, platillos, categorías)
+  components/                MenuFeed, ProductManager, QrCard, BusinessForm, etc.
+  lib/                       Supabase (cliente/servidor), datos, métricas, utilidades
+  proxy.ts                   Protege /panel y /onboarding y refresca la sesión
+supabase/schema.sql          Base de datos completa
+public/brand/                Logo de Antojo (SVG/PNG)
+```
+
+## Siguientes fases (roadmap)
+
+- **Fase 2 · Lealtad:** registro del cliente (nombre + WhatsApp), puntos por visita, ruleta "Juega y gana" con probabilidades calculadas en el servidor, cupones.
+- **Fase 3 · Pedidos:** pedidos guardados en el panel, estados (pendiente → entregado), envíos con costo, impresión de comandas, pagos con Mercado Pago o Stripe en MXN.
+- **Fase 4 · Marketing:** campañas por correo (Resend) y WhatsApp Business API para clientes que dejaron de venir.
+- **Planes y cobro:** suscripciones con Stripe/Mercado Pago y límites por plan (el Básico promete hasta 15 platillos; aún no se aplica en el código).
+
+---
+
+Diseñado por **Cero+**
