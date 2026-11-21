@@ -11,6 +11,8 @@ export type Restaurant = {
   logo_url: string | null;
   is_open: boolean;
   review_prompt: boolean;
+  instagram_url: string | null;
+  game_enabled: boolean;
   created_at: string;
 };
 

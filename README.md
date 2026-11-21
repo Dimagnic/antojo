@@ -10,7 +10,7 @@ Stack: **Next.js 16 (App Router) + Tailwind 4 + Supabase + Vercel**.
 | Sitio público `/` | Landing, funciones, cómo funciona, precios en MXN, preguntas frecuentes |
 | Cuenta `/registro` `/entrar` | Correo y contraseña o Google (Supabase Auth) |
 | Alta guiada `/onboarding` | 1) Datos del negocio, 2) Platillos, 3) QR |
-| Carta pública `/m/[slug]` | Scroll vertical tipo TikTok con fotos y videos, categorías, me gusta, compartir, carrito y pedido por WhatsApp, invitación a reseñar en Google, aviso de "cerrado" |
+| Carta pública `/m/[slug]` | Pantalla de entrada, scroll vertical tipo TikTok con fotos y videos animados, categorías, vista en cuadrícula, menú lateral con idiomas ES/EN, ruleta "Juega y gana" con puntos, me gusta, preguntar por WhatsApp, compartir, carrito y pedido por WhatsApp, invitación a reseñar en Google, aviso de "cerrado" |
 | Panel `/panel` | Resumen (visitas, QR PNG/SVG, abierto/cerrado, checklist), Platillos (categorías, fotos y videos, etiquetas, agotado), Métricas (visitas por día, horas pico, platillos más vistos), Ajustes |
 
 Pestañas **Lealtad** y **Pedidos** aparecen como "Pronto" (fase 2).
@@ -22,6 +22,7 @@ Pestañas **Lealtad** y **Pedidos** aparecen como "Pronto" (fase 2).
 1. Entra a <https://supabase.com> y crea un proyecto nuevo (región: `us-east-1` o la más cercana).
 2. Ve a **SQL Editor → New query**, pega todo el contenido de `supabase/schema.sql` y presiona **Run**.
    Esto crea las tablas, la seguridad (RLS) y el bucket `media` para fotos y videos.
+   Si ya habías corrido `schema.sql` antes, corre también `supabase/002_carta.sql` (agrega Juega y gana e Instagram).
 3. Ve a **Authentication → URL Configuration**:
    - **Site URL**: `http://localhost:3000` (luego cámbialo por tu dominio de Vercel).
    - **Redirect URLs**: agrega `http://localhost:3000/auth/callback` y `https://TU-DOMINIO/auth/callback`.

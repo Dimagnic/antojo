@@ -19,6 +19,8 @@ create table if not exists public.restaurants (
   logo_url        text,
   is_open         boolean not null default true,
   review_prompt   boolean not null default true,
+  instagram_url   text,
+  game_enabled    boolean not null default true,
   created_at      timestamptz not null default now()
 );
 create index if not exists restaurants_owner_idx on public.restaurants(owner_id);
@@ -56,7 +58,7 @@ create table if not exists public.events (
   id            bigint generated always as identity primary key,
   restaurant_id uuid not null references public.restaurants(id) on delete cascade,
   product_id    uuid references public.products(id) on delete set null,
-  type          text not null check (type in ('visit','view','add_cart','whatsapp_order','review_click','like')),
+  type          text not null check (type in ('visit','view','add_cart','whatsapp_order','review_click','like','spin','share','comment')),
   created_at    timestamptz not null default now()
 );
 create index if not exists events_restaurant_time_idx on public.events(restaurant_id, created_at desc);

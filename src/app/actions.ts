@@ -78,6 +78,8 @@ export async function updateRestaurant(_: ActionState, form: FormData): Promise<
       google_place_id: extractPlaceId(clean(form.get("google_place_id"))) ?? extractPlaceId(maps),
       logo_url: clean(form.get("logo_url")),
       review_prompt: form.get("review_prompt") === "on",
+      game_enabled: form.get("game_enabled") === "on",
+      instagram_url: clean(form.get("instagram_url")),
     })
     .eq("id", r.id);
   if (error) return { error: "No se pudo guardar. Intenta de nuevo." };

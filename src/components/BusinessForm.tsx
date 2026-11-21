@@ -78,6 +78,14 @@ export function BusinessForm({ action, restaurant, submitLabel, siteUrl }: Props
             Logo (URL de imagen, opcional)
             <input name="logo_url" type="url" defaultValue={restaurant?.logo_url ?? ""} className={input} />
           </label>
+          <label className="block text-sm font-medium">
+            Instagram del negocio (opcional)
+            <input name="instagram_url" type="url" defaultValue={restaurant?.instagram_url ?? ""} placeholder="https://instagram.com/tu-negocio" className={input} />
+          </label>
+          <label className="flex items-center gap-2 text-sm font-medium">
+            <input type="checkbox" name="game_enabled" defaultChecked={restaurant?.game_enabled ?? true} className="h-4 w-4 accent-rosa" />
+            Mostrar &ldquo;Juega y gana&rdquo; (ruleta de premios) en la carta
+          </label>
           <label className="flex items-center gap-2 text-sm font-medium">
             <input type="checkbox" name="review_prompt" defaultChecked={restaurant?.review_prompt} className="h-4 w-4 accent-rosa" />
             Invitar a los clientes a dejar reseña en Google

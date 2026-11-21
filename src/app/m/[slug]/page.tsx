@@ -33,6 +33,8 @@ export default async function Page({ params }: Props) {
         logo_url: restaurant.logo_url,
         is_open: restaurant.is_open,
         review: restaurant.review_prompt ? reviewUrl(restaurant) : null,
+        instagram: restaurant.instagram_url ?? null,
+        game: restaurant.game_enabled ?? true,
       }}
       categories={categories.filter((c) => products.some((p) => p.category_id === c.id))}
       products={products}
