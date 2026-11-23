@@ -34,7 +34,7 @@ export function SiteHeader() {
     <div className="fixed inset-x-0 top-0 z-50">
       {/* Barra promocional */}
       <div className="bg-gradient-to-r from-rosa via-[#ff2f92] to-[#ff5c7a] shadow-[0_6px_24px_-8px_rgba(230,0,126,0.6)]">
-        <div className="mx-auto flex max-w-[1210px] items-center justify-center gap-3 px-4 py-2 text-[13px] font-semibold text-white">
+        <div className="mx-auto flex max-w-[1210px] items-center justify-center gap-3 px-4 py-1.5 text-[11.5px] font-semibold text-white md:py-2 md:text-[13px]">
           <span>Prueba Pro 14 días gratis</span>
           <Link
             href="/registro"
@@ -46,7 +46,7 @@ export function SiteHeader() {
       </div>
 
       {/* Encabezado flotante: se vuelve translúcido al bajar */}
-      <div className="px-4 pt-3 sm:px-6">
+      <div className="px-3 pt-2.5 sm:px-6 md:pt-3">
         <div
           className={`mx-auto max-w-[1210px] rounded-[28px] transition-all duration-500 ${
             scrolled || open
@@ -54,10 +54,10 @@ export function SiteHeader() {
               : "bg-white shadow-[0_10px_40px_-16px_rgba(27,17,48,0.2)]"
           }`}
         >
-          <div className="flex items-center justify-between px-5 py-3.5">
+          <div className="flex items-center justify-between px-4 py-2.5 md:px-5 md:py-3.5">
             <Link href="/" aria-label="Antojo, inicio" onClick={() => setOpen(false)}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/antojo-logo.svg" alt="Antojo" className="h-8 w-auto" />
+              <img src="/brand/antojo-logo.svg" alt="Antojo" className="h-6 w-auto md:h-8" />
             </Link>
 
             <nav className="hidden items-center gap-7 text-[15px] font-medium text-tinta lg:flex">

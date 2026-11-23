@@ -30,7 +30,7 @@ export function Showcase() {
       <div ref={wrap} className="no-scrollbar overflow-x-auto lg:overflow-visible">
         <div className="marquee flex w-max gap-4 px-4 py-4 lg:w-full lg:justify-center lg:gap-7">
           {loop.map((c, i) => (
-            <figure key={i} className={`w-[170px] shrink-0 lg:w-[186px] ${i >= 5 ? "lg:hidden" : ""}`}>
+            <figure key={i} className={`w-[150px] shrink-0 sm:w-[170px] lg:w-[186px] ${i >= 5 ? "lg:hidden" : ""}`}>
               <figcaption className="mb-3 flex h-9 items-center justify-center gap-1.5 text-[15px] font-extrabold tracking-tight text-rosa">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-rosa-50 text-[14px]">{c.emoji}</span>
                 {c.type}

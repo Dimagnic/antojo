@@ -55,9 +55,9 @@ export function Pricing() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 grid max-w-[760px] items-stretch gap-6 md:grid-cols-2">
+      <div className="mx-auto mt-8 grid max-w-[760px] md:mt-10 items-stretch gap-6 md:grid-cols-2">
         {/* Pro */}
-        <div className="flex flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_24px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-rosa-100">
+        <div className="order-2 flex flex-col overflow-hidden rounded-[28px] bg-white shadow md:order-1-[0_24px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-rosa-100">
           <div className="relative overflow-hidden bg-gradient-to-br from-rosa via-[#ff2f92] to-[#ff5c7a] px-6 pb-5 pt-6 text-white">
             <span className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/15" />
             <h3 className="text-[22px] font-bold">Pro</h3>
@@ -95,7 +95,7 @@ export function Pricing() {
         </div>
 
         {/* Max */}
-        <div className="relative flex flex-col overflow-hidden rounded-[28px] bg-[#0f0a18] text-white shadow-[0_30px_80px_-20px_rgba(230,0,126,0.45)] ring-2 ring-rosa/70">
+        <div className="relative order-1 flex flex-col overflow-hidden rounded-[28px] bg-[#0f0a18] md:order-2 text-white shadow-[0_30px_80px_-20px_rgba(230,0,126,0.45)] ring-2 ring-rosa/70">
           <span className="absolute left-1/2 top-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-b-xl bg-gradient-to-r from-rosa to-sol px-4 py-1 text-[11px] font-bold uppercase tracking-wide">
             Oferta por tiempo limitado
           </span>

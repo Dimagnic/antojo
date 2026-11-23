@@ -152,42 +152,42 @@ export default function Home() {
       <SiteHeader />
 
       {/* ───── Hero ───── */}
-      <section className="relative px-5 pb-24 pt-40 md:pt-48">
+      <section className="relative px-4 pb-24 pt-[124px] md:px-5 md:pt-48">
         <div className="pointer-events-none absolute -right-40 top-20 h-[460px] w-[460px] rounded-full bg-rosa/10 blur-3xl" />
         <div className="pointer-events-none absolute -left-40 top-[520px] h-[360px] w-[360px] rounded-full bg-sol/15 blur-3xl" />
-        <div className="relative mx-auto grid max-w-[1210px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative mx-auto grid max-w-[1210px] items-center gap-6 md:gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="anim-fade-up text-center lg:text-left">
-              <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff5c7a] px-4 py-1.5 text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
+              <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff5c7a] px-3 py-1 text-[11px] md:px-4 md:py-1.5 md:text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
                 Carta QR tipo TikTok
               </span>
             </div>
-            <h1 className="anim-fade-up mt-5 text-[34px] font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[54px]" style={{ animationDelay: "100ms" }}>
+            <h1 className="anim-fade-up mt-3 text-[27px] font-semibold leading-[1.2] tracking-tight sm:text-5xl md:mt-5 lg:text-[54px]" style={{ animationDelay: "100ms" }}>
               Tu carta QR,
               <br />
               ahora <RotatingWord words={["vende", "trabaja", "califica"]} /> por <span className="text-rosa">ti.</span>
             </h1>
-            <p className="anim-fade-up mt-5 max-w-xl text-[17px] leading-relaxed text-tinta/85 lg:text-lg" style={{ animationDelay: "200ms" }}>
+            <p className="anim-fade-up mt-3 max-w-xl text-[13px] leading-relaxed text-tinta/85 md:mt-5 md:text-[17px] lg:text-lg" style={{ animationDelay: "200ms" }}>
               Transforma tu <span className="font-semibold text-tinta-70 line-through decoration-rosa decoration-2">PDF aburrido</span> en una{" "}
               <b className="font-semibold text-rosa">experiencia interactiva</b>
               <br className="hidden lg:block" /> que vende más y consigue reseñas sin descargar nada.
             </p>
-            <div className="anim-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "300ms" }}>
-              <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-2xl px-8 py-3.5 text-[16px] font-semibold text-white">
+            <div className="anim-fade-up mt-5 flex flex-col gap-2 sm:flex-row sm:items-center md:mt-8 md:gap-3" style={{ animationDelay: "300ms" }}>
+              <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-xl px-8 py-2.5 text-[13px] font-semibold text-white md:rounded-2xl md:py-3.5 md:text-[16px]">
                 Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-[16px] font-semibold text-tinta shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
+              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-2 text-[12px] font-semibold text-tinta md:rounded-2xl md:py-3.5 md:text-[16px] shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
                 Ver en acción <span className="h-2 w-2 animate-pulse rounded-full bg-rosa" />
               </Link>
             </div>
-            <p className="anim-fade-up mt-5 text-[15px] text-tinta-70" style={{ animationDelay: "400ms" }}>
+            <p className="anim-fade-up mt-3 text-[11.5px] text-tinta-70 md:mt-5 md:text-[15px]" style={{ animationDelay: "400ms" }}>
               <b className="font-semibold text-tinta/80">Prueba gratuita</b> de 14 días. No se requieren datos de tarjeta.
             </p>
-            <p className="anim-fade-up mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px]" style={{ animationDelay: "450ms" }}>
+            <p className="anim-fade-up mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] md:mt-3 md:gap-x-2 md:text-[15px]" style={{ animationDelay: "450ms" }}>
               <span className="text-tinta-70">Integración con</span> <b className="font-semibold">Google Maps</b> <span className="text-red-500">📍</span> <span className="text-tinta-70">y</span> <b className="font-semibold">WhatsApp</b>{" "}
               <MessageCircle className="h-4 w-4 fill-[#25D366] text-[#25D366]" />
             </p>
-            <div className="anim-fade-up mt-5 flex items-center gap-3 border-l-4 border-rosa pl-4" style={{ animationDelay: "500ms" }}>
+            <div className="anim-fade-up mt-5 hidden items-center gap-3 border-l-4 border-rosa pl-4 md:flex" style={{ animationDelay: "500ms" }}>
               <span className="text-lg tracking-wider text-sol">★★★★★</span>
               <span className="text-[15px] text-tinta-70">
                 Hecha para <b className="font-semibold text-tinta">juntar reseñas</b> en Google Maps
@@ -223,7 +223,7 @@ export default function Home() {
               <p className="absolute bottom-0 left-10 text-[10px] text-tinta-70/70">Reseñas de ejemplo</p>
             </div>
             <div className="relative">
-              <div className="absolute -right-10 -top-10 rotate-[8deg] rounded-2xl bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
+              <div className="absolute -right-12 -top-6 rotate-[8deg] rounded-2xl md:-right-10 md:-top-10 bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-20 w-20 sm:h-[120px] sm:w-[120px]" />
               </div>
@@ -257,7 +257,7 @@ export default function Home() {
           <div className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
             {stats.map((s) => (
               <div key={s.n} className="px-7 py-6">
-                <p className="text-[30px] font-bold leading-none text-rosa">{s.n}</p>
+                <p className="text-[28px] font-bold leading-none text-rosa md:text-[30px]">{s.n}</p>
                 <p className="mt-2 text-[14px] font-semibold">{s.t}</p>
                 <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/60">{s.d}</p>
               </div>
@@ -269,14 +269,14 @@ export default function Home() {
       {/* ───── Funciones ───── */}
       <section id="funciones" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto text-center">
-          <h2 className="text-[28px] font-semibold leading-tight tracking-tight md:text-[38px]">Muestra mejor. Vende más. Junta reseñas.</h2>
+          <h2 className="mx-auto max-w-[280px] text-[22px] font-semibold leading-tight tracking-tight sm:max-w-none md:text-[38px]">Muestra mejor. Vende más. Junta reseñas.</h2>
         </Reveal>
         <div className="mx-auto mt-10 grid max-w-[1210px] gap-4 md:grid-cols-2 lg:grid-cols-12">
           {features.map((f, i) => (
             <Reveal
               key={f.pill}
               delay={(i % 3) * 110}
-              className={`relative overflow-hidden rounded-[24px] p-7 md:p-8 ${SPANS[i]} ${
+              className={`relative overflow-hidden rounded-[20px] p-5 md:rounded-[24px] md:p-8 ${SPANS[i]} ${
                 f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : `tint-${f.tint ?? "rosa"} shadow-[0_20px_50px_-35px_rgba(27,17,48,0.35)]`
               }`}
             >
@@ -292,8 +292,8 @@ export default function Home() {
                 </span>
                 {f.soon && <span className="rounded-full bg-sol/20 px-2.5 py-1 text-[11px] font-bold text-amber-700">Próximamente</span>}
               </div>
-              <h3 className={`mt-4 font-medium leading-[1.25] tracking-tight ${i === 0 ? "max-w-[420px] text-[26px] md:text-[30px]" : "text-[22px] md:text-[24px]"}`}>{f.title}</h3>
-              <p className={`mt-3 max-w-[460px] text-[13.5px] leading-[1.7] ${f.dark ? "text-white/70" : "text-tinta-70"}`}>{f.text}</p>
+              <h3 className={`mt-4 font-medium leading-[1.25] tracking-tight ${i === 0 ? "max-w-[420px] text-[21px] md:text-[30px]" : "text-[19px] md:text-[24px]"}`}>{f.title}</h3>
+              <p className={`mt-2.5 max-w-[460px] text-[12.5px] leading-[1.7] md:text-[13.5px] ${f.dark ? "text-white/70" : "text-tinta-70"}`}>{f.text}</p>
               {f.mock}
                 </div>
                 {f.aside && <div className="lg:pt-10">{f.aside}</div>}
@@ -306,10 +306,10 @@ export default function Home() {
       {/* ───── Precios ───── */}
       <section id="precios" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[30px] font-bold leading-tight tracking-tight md:text-[40px]">
+          <h2 className="text-[20px] font-bold leading-tight tracking-tight md:text-[40px]">
             Elige el plan que acompaña el <span className="text-rosa">crecimiento de tu negocio</span>
           </h2>
-          <p className="mt-4 text-[17px] leading-relaxed text-tinta-70">
+          <p className="mt-3 text-[12.5px] leading-relaxed text-tinta-70 md:mt-4 md:text-[17px]">
             Empieza gratis con una carta QR profesional o desbloquea todo para vender, medir y hacer crecer tu marca.
           </p>
         </Reveal>
@@ -320,7 +320,7 @@ export default function Home() {
       <section className="px-5 pb-28">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-rosa">Blog</p>
-          <h2 className="mt-2 text-[30px] font-semibold leading-tight tracking-tight md:text-[44px]">Guías para vender más con tu carta QR</h2>
+          <h2 className="mt-2 text-[22px] font-semibold leading-tight tracking-tight md:text-[44px]">Guías para vender más con tu carta QR</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-tinta-70">
             Ideas prácticas para atraer clientes desde Google, mejorar tu carta digital y juntar reseñas sin depender de publicidad.
           </p>
@@ -342,7 +342,7 @@ export default function Home() {
       {/* ───── Preguntas ───── */}
       <section id="preguntas" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto max-w-3xl">
-          <h2 className="text-center text-[30px] font-semibold tracking-tight md:text-[44px]">
+          <h2 className="text-center text-[22px] font-semibold tracking-tight md:text-[44px]">
             Preguntas <span className="text-rosa">frecuentes</span>
           </h2>
           <p className="mt-3 text-center text-[16px] text-tinta-70">Resolvemos tus dudas sobre tu nueva carta estilo TikTok.</p>
@@ -367,10 +367,10 @@ export default function Home() {
           <div className="pointer-events-none absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-sol/15" />
           <div className="relative grid items-center gap-10 md:grid-cols-2">
             <div>
-              <h2 className="text-[34px] font-semibold leading-[1.15] tracking-tight md:text-5xl">
+              <h2 className="text-[24px] font-semibold leading-[1.15] tracking-tight md:text-5xl">
                 Comienza tu prueba gratuita <span className="text-rosa">hoy</span>
               </h2>
-              <p className="mt-4 text-[18px] leading-relaxed text-tinta-70">Crea tu primera carta digital sin compromiso.</p>
+              <p className="mt-3 text-[13px] leading-relaxed text-tinta-70 md:mt-4 md:text-[18px]">Crea tu primera carta digital sin compromiso.</p>
               <Link href="/registro" className="btn-primary mt-7 flex items-center justify-center gap-2 rounded-2xl py-3.5 font-semibold text-white md:max-w-sm">
                 Crear mi carta gratis <ArrowRight className="h-4 w-4" />
               </Link>
@@ -393,7 +393,7 @@ export default function Home() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/antojo-logo.svg" alt="Antojo" className="mx-auto h-12 w-auto" />
           <p className="mt-2 text-[13px] font-semibold uppercase tracking-[0.4em] text-tinta">Partners</p>
-          <h2 className="mt-6 text-[32px] font-semibold leading-tight tracking-tight md:text-5xl">
+          <h2 className="mt-6 text-[24px] font-semibold leading-tight tracking-tight md:text-5xl">
             Conecta restaurantes.
             <br />
             <span className="text-rosa">Genera ingresos todos los meses.</span>
