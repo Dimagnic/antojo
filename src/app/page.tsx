@@ -348,7 +348,7 @@ export default function Home() {
           <p className="mt-3 text-center text-[16px] text-tinta-70">Resolvemos tus dudas sobre tu nueva carta estilo TikTok.</p>
           <div className="mt-8 divide-y divide-tinta/10 border-y border-tinta/10">
             {faqs.map(([q, a]) => (
-              <details key={q} className="group py-5">
+              <details key={q} name="preguntas" className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-medium">
                   {q}
                   <span className="text-xl text-tinta-70 transition group-open:rotate-45">+</span>
