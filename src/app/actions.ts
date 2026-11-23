@@ -98,7 +98,7 @@ export async function toggleOpen(isOpen: boolean) {
 
 // ---------------- Categorías ----------------
 
-export async function createCategory(name: string) {
+export async function createCategory(name: string, nameEn?: string) {
   const r = await requireRestaurant();
   const n = name.trim();
   if (!n) return { error: "Escribe un nombre." };
@@ -109,7 +109,7 @@ export async function createCategory(name: string) {
     .eq("restaurant_id", r.id);
   const { data, error } = await supabase
     .from("categories")
-    .insert({ restaurant_id: r.id, name: n, position: count ?? 0 })
+    .insert({ restaurant_id: r.id, name: n, name_en: nameEn?.trim() || null, position: count ?? 0 })
     .select()
     .single();
   if (error) return { error: "No se pudo crear la categoría." };
@@ -131,7 +131,9 @@ export async function deleteCategory(id: string) {
 export type ProductInput = {
   id?: string;
   name: string;
+  name_en?: string | null;
   description?: string | null;
+  description_en?: string | null;
   price: number;
   category_id?: string | null;
   media_url?: string | null;
@@ -149,6 +151,8 @@ export async function saveProduct(input: ProductInput) {
     restaurant_id: r.id,
     name: input.name.trim(),
     description: input.description?.trim() || null,
+    name_en: input.name_en?.trim() || null,
+    description_en: input.description_en?.trim() || null,
     price: input.price,
     category_id: input.category_id || null,
     media_url: input.media_url || null,

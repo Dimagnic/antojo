@@ -20,6 +20,7 @@ export type Category = {
   id: string;
   restaurant_id: string;
   name: string;
+  name_en?: string | null;
   position: number;
 };
 
@@ -28,7 +29,9 @@ export type Product = {
   restaurant_id: string;
   category_id: string | null;
   name: string;
+  name_en?: string | null;
   description: string | null;
+  description_en?: string | null;
   price: number;
   media_url: string | null;
   media_type: "image" | "video" | null;

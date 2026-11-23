@@ -30,6 +30,7 @@ create table if not exists public.categories (
   id            uuid primary key default gen_random_uuid(),
   restaurant_id uuid not null references public.restaurants(id) on delete cascade,
   name          text not null,
+  name_en       text,
   position      int  not null default 0,
   created_at    timestamptz not null default now()
 );
@@ -41,7 +42,9 @@ create table if not exists public.products (
   restaurant_id uuid not null references public.restaurants(id) on delete cascade,
   category_id   uuid references public.categories(id) on delete set null,
   name          text not null,
+  name_en       text,
   description   text,
+  description_en text,
   price         numeric(10,2) not null default 0,
   media_url     text,
   media_type    text check (media_type in ('image','video')),
@@ -120,3 +123,5 @@ create policy "media subir propio" on storage.objects for insert to authenticate
 drop policy if exists "media borrar propio" on storage.objects;
 create policy "media borrar propio" on storage.objects for delete to authenticated
   using (bucket_id = 'media' and (storage.foldername(name))[1] = auth.uid()::text);
+
+-- Premios de la ruleta: ver 003_ingles_y_premios.sql (también aplica en instalaciones nuevas)

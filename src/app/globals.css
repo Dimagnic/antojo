@@ -9,7 +9,7 @@
   --color-tinta: #1b1130;
   --color-tinta-70: #4a4160;
   --color-crema: #fff7fb;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -62,9 +62,74 @@ body {
 /* En el feed, el texto entra cada vez que el platillo queda en pantalla */
 .slide .anim { animation: none; opacity: 0; }
 .slide[data-active="true"] .anim { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.slide[data-active="true"] .media { animation: kenburns 7s ease-out both; }
+.slide[data-active="true"] .media.kb-a { animation: kbA 9s ease-out both; }
+.slide[data-active="true"] .media.kb-b { animation: kbB 9s ease-out both; }
+.slide .media img { filter: saturate(1.12) contrast(1.05) brightness(1.03); }
+
+@keyframes kbA {
+  from { transform: scale(1.14) translate3d(-2%, 1.5%, 0); }
+  to { transform: scale(1.02) translate3d(0, 0, 0); }
+}
+@keyframes kbB {
+  from { transform: scale(1.02) translate3d(1.5%, -1%, 0); }
+  to { transform: scale(1.14) translate3d(-1%, 1%, 0); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .anim, .anim-fade-up, .anim-fade, .anim-pop, .anim-sheet,
   .slide[data-active="true"] .anim, .slide[data-active="true"] .media { animation: none !important; opacity: 1 !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* ── Página principal ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal[data-shown="true"] { opacity: 1; transform: none; }
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(100deg, #e6007e 0%, #ff2f92 55%, #ff5c7a 100%);
+  box-shadow: 0 10px 30px -10px rgb(230 0 126 / 0.55);
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: shine 3.2s ease-in-out infinite;
+}
+@keyframes shine { 0%, 60% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+.card-dark {
+  background:
+    radial-gradient(120% 80% at 100% 100%, rgb(230 0 126 / 0.35), transparent 55%),
+    radial-gradient(80% 60% at 0% 0%, rgb(255 184 0 / 0.08), transparent 60%),
+    #150d24;
+}
+.card-light {
+  background: linear-gradient(160deg, #ffffff 0%, #fff6fa 100%);
+}
+.grid-dots {
+  background-image: radial-gradient(rgb(27 17 48 / 0.06) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { animation: marquee 40s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spinSlow 14s linear infinite; }
+
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float-y { animation: floatY 5s ease-in-out infinite; }
+
+@keyframes kbHero { from { transform: scale(1.18); } to { transform: scale(1.02); } }
+.kb-hero { animation: kbHero 4.5s ease-out both; }
+
+@keyframes slideNotif { 0%, 15% { transform: translateY(-120%); opacity: 0; } 25%, 85% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-120%); opacity: 0; } }
+.notif { animation: slideNotif 6s ease-in-out infinite; }
+
+@keyframes growBar { from { width: 0; } }
+.reveal[data-shown="true"] .grow-bar { animation: growBar 1.6s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }

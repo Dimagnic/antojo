@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
@@ -23,6 +24,7 @@ import type { Category, Product } from "@/lib/types";
 import { formatMoney } from "@/lib/utils";
 import { getDict, type Dict, type Lang } from "./menu/i18n";
 import { Wheel } from "./menu/Wheel";
+import { FlagMX, FlagUS } from "./Flags";
 
 type MenuRestaurant = {
   id: string;
@@ -60,10 +62,13 @@ export function MenuFeed({
   restaurant,
   categories,
   products,
+  demo = false,
 }: {
   restaurant: MenuRestaurant;
   categories: Category[];
   products: Product[];
+  /** Carta de ejemplo: no registra métricas ni guarda datos */
+  demo?: boolean;
 }) {
   const supabase = useMemo(() => createClient(), []);
   const feedRef = useRef<HTMLDivElement>(null);
@@ -84,6 +89,12 @@ export function MenuFeed({
   const [points, setPoints] = useState<Points>({ total: 0, lastSpin: null, history: [] });
 
   const ptsKey = `antojo:pts:${restaurant.id}`;
+  const [prize, setPrize] = useState<number>(0);
+  const [prizeEmail, setPrizeEmail] = useState("");
+  const [prizeState, setPrizeState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const catName = (c: Category) => (lang === "en" && c.name_en ? c.name_en : c.name);
+  const pName = (p: Product) => (lang === "en" && p.name_en ? p.name_en : p.name);
+  const pDesc = (p: Product) => (lang === "en" && p.description_en ? p.description_en : p.description);
 
   const ordered = useMemo(() => {
     const byCat = categories.flatMap((c) => products.filter((p) => p.category_id === c.id));
@@ -93,9 +104,10 @@ export function MenuFeed({
 
   const track = useCallback(
     (type: EventType, productId?: string) => {
+      if (demo) return;
       supabase.from("events").insert({ restaurant_id: restaurant.id, type, product_id: productId ?? null }).then(() => {});
     },
-    [supabase, restaurant.id],
+    [supabase, restaurant.id, demo],
   );
 
   // Arranque: idioma, puntos, visita y pantalla de entrada
@@ -201,6 +213,7 @@ export function MenuFeed({
   async function like(p: Product) {
     if (liked[p.id] !== undefined) return;
     setLiked((l) => ({ ...l, [p.id]: p.likes + 1 }));
+    if (demo) return;
     const { data } = await supabase.rpc("like_product", { p_id: p.id });
     if (typeof data === "number") setLiked((l) => ({ ...l, [p.id]: data }));
   }
@@ -226,8 +239,21 @@ export function MenuFeed({
     save("antojo:lang", l);
   }
 
+  async function savePrize(e: React.FormEvent) {
+    e.preventDefault();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(prizeEmail)) {
+      setPrizeState("error");
+      return;
+    }
+    setPrizeState("saving");
+    if (!demo) await supabase.from("prize_claims").insert({ restaurant_id: restaurant.id, email: prizeEmail.trim(), points: prize });
+    setPrizeState("saved");
+  }
+
   function onSpinResult(pts: number) {
     track("spin");
+    setPrize(pts);
+    setPrizeState("idle");
     setPoints((prev) => {
       const next: Points = {
         total: prev.total + pts,
@@ -278,7 +304,7 @@ export function MenuFeed({
                     activeCat === c.id ? "scale-105 bg-white text-tinta shadow-lg" : "bg-black/40 text-white backdrop-blur-md"
                   }`}
                 >
-                  {c.name}
+                  {catName(c)}
                 </button>
               ))}
             </div>
@@ -341,13 +367,13 @@ export function MenuFeed({
                 data-active={isActive}
                 className="slide relative h-full w-full snap-start snap-always overflow-hidden"
               >
-                <div className="media absolute inset-0">
+                <div className={`media absolute inset-0 ${i % 2 ? "kb-b" : "kb-a"}`}>
                   {p.media_url ? (
                     p.media_type === "video" ? (
                       <video src={p.media_url} muted loop playsInline preload={i < 2 ? "auto" : "metadata"} className="h-full w-full object-cover" />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.media_url} alt={p.name} loading={i < 2 ? "eager" : "lazy"} className="h-full w-full object-cover" />
+                      <img src={p.media_url} alt={pName(p)} loading={i < 2 ? "eager" : "lazy"} className="h-full w-full object-cover" />
                     )
                   ) : (
                     <div className="flex h-full items-center justify-center bg-gradient-to-br from-rosa-600 via-tinta to-black text-8xl">🍽️</div>
@@ -401,12 +427,12 @@ export function MenuFeed({
                       <span className="rounded-full bg-white/15 px-3 py-1 text-sm font-semibold text-white/80">{t.soldOut}</span>
                     )}
                   </div>
-                  <h2 className="anim mt-2.5 text-[28px] font-extrabold leading-[1.1] drop-shadow-lg" style={{ animationDelay: "220ms" }}>
-                    {p.name}
+                  <h2 className="anim mt-2.5 text-[26px] font-bold leading-[1.15] drop-shadow-lg" style={{ animationDelay: "220ms" }}>
+                    {pName(p)}
                   </h2>
-                  {p.description && (
+                  {pDesc(p) && (
                     <p className="anim mt-2 text-[15px] leading-relaxed text-white/85" style={{ animationDelay: "320ms" }}>
-                      {p.description}
+                      {pDesc(p)}
                     </p>
                   )}
                 </div>
@@ -456,7 +482,7 @@ export function MenuFeed({
                     <div className="flex h-full items-center justify-center text-5xl">🍽️</div>
                   )}
                   <span className="absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black/90 to-transparent px-2 pb-2 pt-6 text-xs font-bold">
-                    {p.name}
+                    {pName(p)}
                   </span>
                 </button>
               ))}
@@ -498,7 +524,7 @@ export function MenuFeed({
                   }`}
                   style={{ animationDelay: `${i * 35}ms` }}
                 >
-                  {c.name}
+                  {catName(c)}
                 </button>
               ))}
             </nav>
@@ -525,7 +551,35 @@ export function MenuFeed({
           <Modal onClose={() => setPanel(null)}>
             <h3 className="text-center text-2xl font-extrabold">{t.wheel}</h3>
             <p className="mb-4 mt-1 text-center text-sm text-white/75">{t.wheelText}</p>
-            <Wheel t={t} canSpin={canSpin} onResult={onSpinResult} />
+            {prize > 0 && prizeState !== "saved" ? (
+              <form onSubmit={savePrize} className="anim-pop rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <div className="flex items-center gap-3">
+                  <Coin />
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-sol">{t.youWon}</p>
+                    <p className="text-xl font-bold">
+                      +{prize} {t.points}
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-3 text-sm text-white/75">{t.savePrizeText}</p>
+                <input
+                  type="email"
+                  value={prizeEmail}
+                  onChange={(e) => setPrizeEmail(e.target.value)}
+                  placeholder={t.emailPh}
+                  className="mt-3 w-full rounded-xl bg-white/10 px-4 py-3 text-sm outline-none ring-1 ring-white/15 placeholder:text-white/40 focus:ring-rosa"
+                />
+                {prizeState === "error" && <p className="mt-1.5 text-xs text-red-300">{t.badEmail}</p>}
+                <button disabled={prizeState === "saving"} className="mt-3 w-full rounded-full bg-rosa py-3 font-bold transition active:scale-95 disabled:opacity-60">
+                  {t.savePrize}
+                </button>
+              </form>
+            ) : prizeState === "saved" ? (
+              <p className="anim-pop rounded-2xl bg-white/5 p-4 text-center font-semibold text-sol ring-1 ring-white/10">{t.saved}</p>
+            ) : (
+              <Wheel t={t} canSpin={canSpin} onResult={onSpinResult} />
+            )}
             <button onClick={() => setPanel("points")} className="mt-3 flex w-full items-center justify-center gap-2 text-sm font-semibold text-white/80">
               <Coin small /> {t.myPoints}: {points.total} {t.pts}
             </button>
@@ -588,6 +642,7 @@ export function MenuFeed({
         {/* ── Pedido ── */}
         {panel === "cart" && (
           <CartSheet
+            demo={demo}
             t={t}
             items={items}
             cart={cart}
@@ -655,30 +710,8 @@ function LangButton({ active, onClick, flag, label }: { active: boolean; onClick
   );
 }
 
-function FlagMX() {
-  return (
-    <svg viewBox="0 0 30 20" className="h-3.5 w-5 overflow-hidden rounded-[2px]">
-      <rect width="10" height="20" fill="#006847" />
-      <rect x="10" width="10" height="20" fill="#fff" />
-      <rect x="20" width="10" height="20" fill="#ce1126" />
-      <circle cx="15" cy="10" r="2.6" fill="#8c5a2b" />
-    </svg>
-  );
-}
-
-function FlagUS() {
-  return (
-    <svg viewBox="0 0 30 20" className="h-3.5 w-5 overflow-hidden rounded-[2px]">
-      <rect width="30" height="20" fill="#fff" />
-      {[0, 2, 4, 6, 8, 10, 12].map((i) => (
-        <rect key={i} y={(i * 20) / 13} width="30" height={20 / 13} fill="#b22234" />
-      ))}
-      <rect width="13" height="10.8" fill="#3c3b6e" />
-    </svg>
-  );
-}
-
 function CartSheet({
+  demo,
   t,
   items,
   cart,
@@ -689,6 +722,7 @@ function CartSheet({
   onClose,
   onSent,
 }: {
+  demo?: boolean;
   t: Dict;
   items: Product[];
   cart: Record<string, number>;
@@ -699,12 +733,17 @@ function CartSheet({
   onClose: () => void;
   onSent: () => void;
 }) {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [mode, setMode] = useState<"toGo" | "delivery" | "table">("toGo");
   const [detail, setDetail] = useState("");
   const [notes, setNotes] = useState("");
 
   function send() {
+    if (demo) {
+      router.push("/registro");
+      return;
+    }
     const lines = [
       `${t.hello} ${restaurant.name}, ${t.wantOrder}`,
       "",
@@ -770,7 +809,7 @@ function CartSheet({
               <textarea className={field} rows={2} placeholder={t.notes} value={notes} onChange={(e) => setNotes(e.target.value)} />
             </div>
             <button onClick={send} className="mt-4 flex w-full items-center justify-between rounded-full bg-[#25D366] px-5 py-3.5 font-bold text-white">
-              <span>{t.sendWa}</span>
+              <span>{demo ? "Crea tu carta y recibe pedidos así" : t.sendWa}</span>
               <span>{money(total)}</span>
             </button>
             <p className="mt-2 text-center text-xs text-tinta-70">{t.waHint}</p>

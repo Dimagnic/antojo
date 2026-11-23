@@ -48,6 +48,13 @@ const dict = {
     name_: "Nombre",
     notes_: "Notas",
     all: "Todo el menú",
+    youWon: "¡Ganaste!",
+    points: "puntos",
+    savePrizeText: "Guarda tu premio: deja tu correo y lo sumamos a tu cuenta en este lugar.",
+    emailPh: "tu@correo.com",
+    savePrize: "Guardar premio",
+    saved: "¡Listo! Tu premio quedó guardado.",
+    badEmail: "Escribe un correo válido.",
   },
   en: {
     add: "Add",
@@ -96,6 +103,13 @@ const dict = {
     name_: "Name",
     notes_: "Notes",
     all: "Full menu",
+    youWon: "You won!",
+    points: "points",
+    savePrizeText: "Save your prize: leave your email and we'll add it to your account here.",
+    emailPh: "you@email.com",
+    savePrize: "Save prize",
+    saved: "Done! Your prize is saved.",
+    badEmail: "Enter a valid email.",
   },
 } as const;
 

@@ -1,23 +1,20 @@
 import Link from "next/link";
 import { CeroBadge } from "@/components/CeroBadge";
 import { Logo } from "@/components/Logo";
+import { SITE } from "@/lib/site";
 
-// ── Edita aquí tus datos de contacto y redes ─────────────────────────────
-const CONTACT = {
-  whatsapp: "", // ej. "522361234567" (solo dígitos, con lada de país)
-  email: "", // ej. "hola@antojo.mx"
-  instagram: "", // ej. "https://instagram.com/antojo.mx"
-  facebook: "", // ej. "https://facebook.com/antojo.mx"
-};
+// Tus datos de contacto y redes se editan en src/lib/site.ts
+const CONTACT = SITE;
 // QR de tu asistente de ClienteAI (guárdalo en public/brand/clienteai-qr.png)
 const ASSISTANT_QR = "/brand/clienteai-qr.png";
 // ─────────────────────────────────────────────────────────────────────────
 
 const product = [
   { href: "/#funciones", label: "Funciones" },
-  { href: "/#como-funciona", label: "Cómo funciona" },
   { href: "/#precios", label: "Precios" },
   { href: "/#preguntas", label: "Preguntas frecuentes" },
+  { href: "/demo", label: "Ver demo" },
+  { href: "/blog", label: "Blog" },
 ];
 
 const account = [

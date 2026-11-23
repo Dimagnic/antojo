@@ -21,6 +21,7 @@ export function ProductManager({ userId, currency, categories, products }: Props
   const router = useRouter();
   const [editing, setEditing] = useState<Partial<Product> | null>(null);
   const [newCat, setNewCat] = useState("");
+  const [newCatEn, setNewCatEn] = useState("");
   const [pending, start] = useTransition();
   const [catError, setCatError] = useState<string | null>(null);
 
@@ -28,10 +29,11 @@ export function ProductManager({ userId, currency, categories, products }: Props
     e.preventDefault();
     if (!newCat.trim()) return;
     start(async () => {
-      const res = await createCategory(newCat);
+      const res = await createCategory(newCat, newCatEn);
       if ("error" in res && res.error) setCatError(res.error);
       else {
         setNewCat("");
+        setNewCatEn("");
         setCatError(null);
         router.refresh();
       }
@@ -74,6 +76,12 @@ export function ProductManager({ userId, currency, categories, products }: Props
               onChange={(e) => setNewCat(e.target.value)}
               placeholder="Nueva categoría (ej. Tacos)"
               className="w-52 rounded-full border border-tinta/15 px-3 py-1.5 text-sm outline-none focus:border-rosa"
+            />
+            <input
+              value={newCatEn}
+              onChange={(e) => setNewCatEn(e.target.value)}
+              placeholder="En inglés (opcional)"
+              className="w-40 rounded-full border border-tinta/15 px-3 py-1.5 text-sm outline-none focus:border-rosa"
             />
             <button disabled={pending} className="rounded-full bg-tinta p-2 text-white disabled:opacity-50" aria-label="Agregar categoría">
               <Plus className="h-4 w-4" />
@@ -196,6 +204,8 @@ function ProductForm({
   const [form, setForm] = useState<ProductInput>({
     id: initial.id,
     name: initial.name ?? "",
+    name_en: initial.name_en ?? "",
+    description_en: initial.description_en ?? "",
     description: initial.description ?? "",
     price: initial.price ?? 0,
     category_id: initial.category_id ?? null,
@@ -295,6 +305,11 @@ function ProductForm({
                 placeholder="Con piña, cebolla, cilantro y salsa de la casa."
               />
             </label>
+            <details className="rounded-xl bg-crema p-3 text-sm" open={Boolean(form.name_en)}>
+              <summary className="cursor-pointer font-medium">En inglés (opcional, para turistas)</summary>
+              <input className={`${input} mt-2`} value={form.name_en ?? ""} onChange={(e) => setForm({ ...form, name_en: e.target.value })} placeholder="Al pastor tacos (3)" />
+              <textarea rows={2} className={`${input} mt-2`} value={form.description_en ?? ""} onChange={(e) => setForm({ ...form, description_en: e.target.value })} placeholder="With pineapple, onion and cilantro." />
+            </details>
             <div>
               <p className="text-sm font-medium">Etiquetas</p>
               <div className="mt-1.5 flex flex-wrap gap-2">
