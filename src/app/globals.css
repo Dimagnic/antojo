@@ -133,3 +133,22 @@ body {
 
 @keyframes growBar { from { width: 0; } }
 .reveal[data-shown="true"] .grow-bar { animation: growBar 1.6s 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+/* Celular del inicio: la carta baja sola entre platillos */
+@keyframes feedScroll {
+  0%, 26% { transform: translateY(0); }
+  33%, 59% { transform: translateY(-33.333%); }
+  66%, 100% { transform: translateY(-66.666%); }
+}
+.feed-scroll { animation: feedScroll 5.2s cubic-bezier(0.65, 0, 0.35, 1) both; }
+
+@keyframes drawLine { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+.draw-line { stroke-dasharray: 600; animation: drawLine 2.2s ease-out both; }
+
+/* Palabra que cambia en el título */
+@keyframes wordIn {
+  from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+.word-in { animation: wordIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@media (min-width: 1024px) { .marquee { animation: none; } }

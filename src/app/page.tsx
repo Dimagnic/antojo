@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   BarChart3,
-  Check,
   Gamepad2,
   Globe,
   Handshake,
@@ -28,19 +27,14 @@ import {
   StatsMock,
   WheelMock,
 } from "@/components/landing/Mocks";
-import { PhoneMock, type Slide } from "@/components/landing/PhoneMock";
+import { HeroPhone } from "@/components/landing/HeroPhone";
+import { Pricing } from "@/components/landing/Pricing";
+import { RotatingWord } from "@/components/landing/RotatingWord";
 import { Reveal } from "@/components/landing/Reveal";
 import { Showcase } from "@/components/landing/Showcase";
 import { SiteHeader } from "@/components/landing/SiteHeader";
 import { POSTS } from "@/lib/blog";
-import { PHOTOS, photo, waLink } from "@/lib/site";
-
-const heroSlides: Slide[] = [
-  { img: photo(PHOTOS.pizzaBoard, 600, 1300), name: "Pizza margarita", desc: "Masa de fermentación lenta, mozzarella fresca y albahaca.", price: "$189" },
-  { img: photo(PHOTOS.tacos, 600, 1300), name: "Tacos de asada (3)", desc: "Cebolla, cilantro y salsa verde de la casa.", price: "$89", tag: "Picante" },
-  { img: photo(PHOTOS.burger, 600, 1300), name: "Burger Antojo", desc: "Carne de 180 g, cheddar y pan brioche.", price: "$169" },
-  { img: photo(PHOTOS.sushi, 600, 1300), name: "Roll de salmón", desc: "8 piezas con aguacate y salsa de soya.", price: "$169" },
-];
+import { waLink } from "@/lib/site";
 
 const stats = [
   { n: "5 min", t: "Para tener tu carta en línea", d: "Sin técnicos, sin papeles, sin complicaciones." },
@@ -57,6 +51,9 @@ type Feature = {
   soon?: boolean;
   mock: React.ReactNode;
 };
+
+// Cuadrícula de escritorio igual a LaCarta: 7/5 · 4/4/4 · 5/7 · 6/6
+const SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-4", "lg:col-span-4", "md:col-span-2 lg:col-span-4", "lg:col-span-5", "lg:col-span-7", "lg:col-span-6", "lg:col-span-6"];
 
 const hl = (w: string) => <span className="text-rosa">{w}</span>;
 
@@ -130,44 +127,6 @@ const features: Feature[] = [
   },
 ];
 
-const plans = [
-  {
-    name: "Pro",
-    tagline: "Todo para vender más desde el primer día",
-    price: "$349",
-    badge: "Más elegido",
-    note: "14 días gratis · Cancela cuando quieras",
-    dark: true,
-    head: "Desbloquea todas las funciones",
-    items: [
-      "Platillos ilimitados con fotos y video",
-      "Pedidos por WhatsApp",
-      "Invitación a reseñar en Google Maps",
-      "Ruleta “Juega y gana” y puntos",
-      "Carta en español e inglés",
-      "Métricas de visitas y platillos",
-      "Sin la marca de Antojo",
-      "Soporte por WhatsApp",
-    ],
-  },
-  {
-    name: "Plus",
-    tagline: "Para fidelizar y crecer con varias sucursales",
-    price: "$599",
-    note: "Cancela cuando quieras",
-    head: "Todo lo del Pro, más:",
-    items: ["Varias sucursales en una cuenta", "Premios y canjes desde el panel", "Promociones por correo (próximamente)", "Gestión de pedidos y comandas (próximamente)", "Acompañamiento personalizado"],
-  },
-  {
-    name: "Básico",
-    tagline: "Para empezar sin pagar",
-    price: "$0",
-    note: "Gratis para siempre",
-    head: "Incluye:",
-    items: ["Carta digital con QR", "Hasta 15 platillos", "Botón de reseña en Google", "Pedidos por WhatsApp"],
-  },
-];
-
 const faqs = [
   ["¿Sirve solo para restaurantes con mesas?", "No. Funciona igual para taquerías, cafeterías, bares, food trucks y negocios para llevar o a domicilio."],
   ["¿Puedo usarlo desde mi celular?", "Sí. Puedes crear, editar y compartir tu carta desde el celular, la tablet o la computadora, sin descargar nada."],
@@ -193,36 +152,62 @@ export default function Home() {
                 Carta QR tipo TikTok
               </span>
             </div>
-            <h1 className="anim-fade-up mt-5 text-[34px] font-semibold leading-[1.15] tracking-tight sm:text-5xl lg:text-[58px]" style={{ animationDelay: "100ms" }}>
+            <h1 className="anim-fade-up mt-5 text-[34px] font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[54px]" style={{ animationDelay: "100ms" }}>
               Tu carta QR,
               <br />
-              ahora <span className="text-rosa">trabaja</span> por <span className="text-rosa">ti.</span>
+              ahora <RotatingWord words={["trabaja", "vende", "califica"]} /> por <span className="text-rosa">ti.</span>
             </h1>
             <p className="anim-fade-up mt-5 max-w-xl text-[17px] leading-relaxed text-tinta/85 lg:text-lg" style={{ animationDelay: "200ms" }}>
               Cambia tu <span className="text-tinta-70 line-through decoration-rosa decoration-2">PDF aburrido</span> por una{" "}
               <b className="font-semibold text-rosa">carta interactiva</b> que abre el antojo, vende más y junta reseñas. Sin descargar apps.
             </p>
-            <div className="anim-fade-up mt-8 space-y-3 sm:max-w-md" style={{ animationDelay: "300ms" }}>
-              <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-2xl py-3.5 text-[16px] font-semibold text-white">
+            <div className="anim-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "300ms" }}>
+              <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-2xl px-8 py-3.5 text-[16px] font-semibold text-white">
                 Crear mi carta gratis <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-2xl bg-white py-3.5 text-[16px] font-medium text-tinta shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10">
+              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-[16px] font-semibold text-tinta shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
                 Ver en acción <span className="h-2 w-2 animate-pulse rounded-full bg-rosa" />
               </Link>
             </div>
             <p className="anim-fade-up mt-5 text-[15px] text-tinta-70" style={{ animationDelay: "400ms" }}>
               <b className="font-semibold text-tinta/80">Prueba gratis</b> de 14 días. No necesitas tarjeta de crédito.
             </p>
-            <p className="anim-fade-up mt-3 flex items-center gap-2 text-[14px] font-semibold" style={{ animationDelay: "450ms" }}>
-              Google Maps <span className="text-red-500">📍</span> <span className="font-normal text-tinta-70">y</span> WhatsApp{" "}
+            <p className="anim-fade-up mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px]" style={{ animationDelay: "450ms" }}>
+              <span className="text-tinta-70">Integración con</span> <b className="font-semibold">Google Maps</b> <span className="text-red-500">📍</span> <span className="text-tinta-70">y</span> <b className="font-semibold">WhatsApp</b>{" "}
               <MessageCircle className="h-4 w-4 fill-[#25D366] text-[#25D366]" />
             </p>
+            <div className="anim-fade-up mt-5 flex items-center gap-3 border-l-4 border-rosa pl-4" style={{ animationDelay: "500ms" }}>
+              <span className="text-lg tracking-wider text-sol">★★★★★</span>
+              <span className="text-[15px] text-tinta-70">
+                Hecha para <b className="font-semibold text-tinta">juntar reseñas</b> en Google Maps
+              </span>
+            </div>
           </div>
 
-          <div className="anim-fade-up relative mx-auto" style={{ animationDelay: "250ms" }}>
-            <div className="float-y relative">
-              <PhoneMock slides={heroSlides} chips={["Principales", "Tacos", "Pizzas", "Bebidas"]} />
-              <div className="absolute -right-12 top-28 rotate-6 rounded-2xl bg-white p-2 shadow-xl ring-1 ring-tinta/5 sm:-right-24 sm:top-16">
+          <div className="anim-fade-up relative mx-auto flex items-center gap-6 lg:mr-0" style={{ animationDelay: "250ms" }}>
+            {/* Reseñas que llegan a Google (ilustración) */}
+            <div className="hidden w-52 flex-col gap-10 xl:flex">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-tinta-70">Ejemplo de reseñas en Google Maps</p>
+              {[
+                { n: "S", c: "bg-red-500", q: "Muy rica la comida, la atención de 10.", w: "Sofía L.", x: "ml-6" },
+                { n: "J", c: "bg-blue-600", q: "Todo muy rico y el lugar es hermoso.", w: "Javier R.", x: "" },
+                { n: "M", c: "bg-purple-600", q: "Increíble el lugar, volveré pronto.", w: "Mariana D.", x: "ml-4" },
+              ].map((r, i) => (
+                <div key={r.w} className={`float-y flex gap-2.5 ${r.x}`} style={{ animationDelay: `${i * 0.8}s` }}>
+                  <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${r.c}`}>{r.n}</span>
+                  <div>
+                    <p className="text-[11px] tracking-widest text-sol">★★★★★</p>
+                    <p className="text-[13px] leading-snug">“{r.q}”</p>
+                    <p className="mt-0.5 text-[11px] text-tinta-70">
+                      {r.w} · <span className="text-red-500">📍</span> Google Maps
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="relative">
+              <HeroPhone />
+              <div className="absolute -right-10 -top-8 rotate-6 rounded-2xl bg-white p-2 shadow-xl ring-1 ring-tinta/5 sm:-right-20">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-16 w-16 sm:h-24 sm:w-24" />
                 <p className="mt-1 text-center text-[9px] font-semibold text-tinta-70">Escanéame</p>
@@ -270,12 +255,12 @@ export default function Home() {
             Muestra mejor. Vende más. <span className="text-rosa">Junta reseñas.</span>
           </h2>
         </Reveal>
-        <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-12">
           {features.map((f, i) => (
             <Reveal
               key={f.pill}
-              delay={(i % 2) * 120}
-              className={`relative overflow-hidden rounded-[32px] p-7 md:p-9 ${
+              delay={(i % 3) * 110}
+              className={`relative overflow-hidden rounded-[32px] p-7 md:p-9 ${SPANS[i]} ${
                 f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : "card-light grid-dots shadow-[0_20px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5"
               }`}
             >
@@ -299,64 +284,15 @@ export default function Home() {
 
       {/* ───── Precios ───── */}
       <section id="precios" className="scroll-mt-32 px-5 pb-20">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="text-[30px] font-bold leading-tight tracking-tight md:text-[44px]">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <h2 className="text-[30px] font-bold leading-tight tracking-tight md:text-[40px]">
             Elige el plan que acompaña el <span className="text-rosa">crecimiento de tu negocio</span>
           </h2>
           <p className="mt-4 text-[17px] leading-relaxed text-tinta-70">
             Empieza gratis con una carta QR profesional o desbloquea todo para vender, medir y hacer crecer tu marca.
           </p>
-          <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[14px] font-semibold shadow ring-1 ring-tinta/10">
-            Precios en pesos mexicanos (MXN)
-          </span>
         </Reveal>
-        <div className="mx-auto mt-12 grid max-w-6xl items-start gap-6 lg:grid-cols-3">
-          {plans.map((p, i) => (
-            <Reveal key={p.name} delay={i * 100} className="relative">
-              {p.badge && (
-                <span className="absolute -top-3.5 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-rosa to-sol px-4 py-1.5 text-[12px] font-bold uppercase tracking-wide text-white ring-4 ring-white">
-                  {p.badge}
-                </span>
-              )}
-              <div
-                className={`overflow-hidden rounded-[32px] ${
-                  p.dark ? "card-dark text-white shadow-2xl shadow-rosa/20 ring-2 ring-rosa/60" : "bg-white shadow-[0_20px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5"
-                }`}
-              >
-                <div className="p-7">
-                  <h3 className="text-[30px] font-bold">{p.name}</h3>
-                  <p className={`text-[14px] ${p.dark ? "text-white/70" : "text-tinta-70"}`}>{p.tagline}</p>
-                </div>
-                <div className={`border-y px-7 py-6 ${p.dark ? "border-white/10" : "border-tinta/5"}`}>
-                  <p className="flex items-end gap-2">
-                    <span className={`text-[52px] font-extrabold leading-none ${p.dark ? "text-rosa" : ""}`}>{p.price}</span>
-                    <span className={`pb-1.5 text-[15px] ${p.dark ? "text-white/70" : "text-tinta-70"}`}>MXN al mes</span>
-                  </p>
-                </div>
-                <div className="p-7">
-                  <Link
-                    href="/registro"
-                    className={`flex items-center justify-center gap-2 rounded-2xl py-3.5 text-[16px] font-bold ${
-                      p.dark ? "btn-primary text-white" : "bg-tinta text-white hover:bg-tinta/90"
-                    }`}
-                  >
-                    Empezar gratis <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <p className={`mt-2.5 text-center text-[13px] ${p.dark ? "text-white/60" : "text-tinta-70"}`}>{p.note}</p>
-                  <p className="mt-6 text-[13px] font-bold uppercase tracking-wide">{p.head}</p>
-                  <ul className="mt-4 space-y-3">
-                    {p.items.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-[15px]">
-                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${p.dark ? "text-sol" : "text-rosa"}`} />
-                        <span className={p.dark ? "text-white/90" : ""}>{it}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Pricing />
       </section>
 
       {/* ───── Blog ───── */}
