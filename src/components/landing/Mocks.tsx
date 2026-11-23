@@ -320,41 +320,65 @@ export function WheelMock() {
   );
 }
 
-/* 8 · Promociones por correo + notificación en el celular */
-export function MailMock() {
+/* 8 · Promociones por correo: el correo (izquierda) y el celular con la notificación (derecha) */
+export function MailEmail() {
   return (
-    <div className="mt-8 space-y-6">
-      <div className="rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
-        <p className="text-[14px] font-medium">Te guardamos una mesa y 20% de descuento</p>
-        <div className="mt-2 flex items-center gap-2 text-[11px] text-tinta-70">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-rosa-50 font-semibold text-rosa">T</span>
-          <span>
-            <b className="text-tinta">Tacos Don Beto</b> &lt;hola@tu-negocio.mx&gt;
-          </span>
-          <span className="ml-auto">12:30</span>
-        </div>
-        <div className="mt-3 overflow-hidden rounded-xl bg-crema text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(PHOTOS.tacos, 700, 300)} alt="Tacos" className="h-32 w-full object-cover" style={vivid} />
-          <div className="p-4">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-rosa">Una invitación para volver</p>
-            <p className="mt-1 font-serif text-2xl leading-tight">Tus tacos favoritos, con 20% menos.</p>
-            <span className="mt-3 inline-block rounded-lg bg-tinta px-4 py-2 text-[12px] font-semibold text-white">Ver la carta</span>
-          </div>
+    <div className="mt-7 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+      <p className="text-[14px] font-medium">Te guardamos una mesa y 20% de descuento</p>
+      <div className="mt-2 flex items-center gap-2 text-[11px] text-tinta-70">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-crema font-serif text-[13px] text-tinta">T</span>
+        <span className="leading-tight">
+          <b className="font-semibold text-tinta">Tacos Don Beto</b> <span className="text-rosa">&lt;hola@donbeto.example&gt;</span>
+          <br />
+          para mí ⌄
+        </span>
+        <span className="ml-auto">12:30 ☆</span>
+      </div>
+      <div className="mt-3 overflow-hidden rounded-xl border border-tinta/10 bg-[#fbf8f3] text-center">
+        <p className="pt-4 font-serif text-[22px] tracking-wide text-tinta">don beto.</p>
+        <p className="pb-3 text-[9px] uppercase tracking-[0.3em] text-tinta-70">Taquería &amp; parrilla</p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={img(PHOTOS.tacosBoard, 700, 340)} alt="Tacos" className="h-36 w-full object-cover" style={vivid} />
+        <div className="px-5 pb-5 pt-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-tinta-70">Una invitación para volver</p>
+          <p className="mt-2 font-serif text-[24px] leading-tight">Tus tacos favoritos, con 20% menos.</p>
+          <p className="mx-auto mt-2 max-w-[260px] text-[11.5px] leading-snug text-tinta-70">
+            Hay sabores que merecen repetirse. Esta semana, vuelve por tus favoritos con un regalo de la casa.
+          </p>
+          <span className="mt-4 inline-block rounded-lg bg-[#4f5b3a] px-5 py-2 text-[12px] font-semibold text-white">Ver la carta</span>
+          <p className="mt-3 text-[9.5px] text-tinta-70">Solo esta semana · Para disfrutar en el local</p>
         </div>
       </div>
-      <div className="relative mx-auto w-[220px] overflow-hidden rounded-[2.2rem] bg-black p-2 shadow-2xl">
-        <div className="relative aspect-[9/12] overflow-hidden rounded-[1.8rem] bg-gradient-to-br from-[#cdd8ef] via-[#e9eef8] to-[#b9c6e4] text-center">
-          <p className="pt-7 text-[11px] text-tinta-70">Martes 27 de octubre</p>
-          <p className="text-5xl font-light tracking-tight text-tinta">12:30</p>
-          <div className="notif absolute inset-x-2.5 top-[112px] rounded-2xl bg-white/90 p-2.5 text-left shadow-lg backdrop-blur">
-            <p className="flex justify-between text-[9px] text-tinta-70">
-              <span>✉️ Correo</span>
-              <span>ahora</span>
-            </p>
-            <p className="text-[10px] font-semibold">Tacos Don Beto</p>
-            <p className="text-[10px]">Tus tacos favoritos, con 20% menos</p>
-          </div>
+    </div>
+  );
+}
+
+export function MailPhone() {
+  return (
+    <div className="mx-auto w-[210px] shrink-0 rounded-[2.6rem] bg-[#1d1b20] p-[7px] shadow-[0_30px_60px_-25px_rgba(27,17,48,0.6)] ring-1 ring-black/50 lg:w-[220px]">
+      <div className="relative aspect-[9/19] overflow-hidden rounded-[2.15rem]">
+        {/* Fondo de pantalla con ondas */}
+        <svg viewBox="0 0 200 420" className="absolute inset-0 h-full w-full" preserveAspectRatio="none" aria-hidden>
+          <rect width="200" height="420" fill="#f3efe9" />
+          <path d="M0 230 C60 180 120 300 200 220 L200 420 L0 420 Z" fill="#c9d8ee" />
+          <path d="M0 300 C70 250 110 360 200 300 L200 420 L0 420 Z" fill="#9fb8de" opacity="0.8" />
+          <path d="M120 0 C160 80 140 160 200 180 L200 0 Z" fill="#dfe8f5" />
+        </svg>
+        <div className="absolute left-1/2 top-2 h-[20px] w-[72px] -translate-x-1/2 rounded-full bg-black" />
+        <div className="relative pt-12 text-center text-tinta">
+          <p className="text-[11px] text-tinta-70">Martes, 27 de octubre</p>
+          <p className="text-[52px] font-light leading-none tracking-tight">12:30</p>
+        </div>
+        <div className="notif absolute inset-x-2.5 top-[132px] rounded-2xl bg-white/90 p-2.5 text-left shadow-lg backdrop-blur">
+          <p className="flex items-center justify-between text-[8.5px] text-tinta-70">
+            <span className="flex items-center gap-1">
+              <span className="flex h-3.5 w-3.5 items-center justify-center rounded bg-[#ea4335] text-[7px] font-bold text-white">M</span> Correo
+            </span>
+            <span>ahora</span>
+          </p>
+          <p className="mt-1 text-[9.5px] font-semibold">Tacos Don Beto</p>
+          <p className="text-[9.5px] font-semibold">Tus tacos favoritos, con 20% menos</p>
+          <p className="text-[8.5px] text-tinta-70">Te guardamos una mesa. Vuelve por tu favorito.</p>
         </div>
       </div>
     </div>
@@ -363,6 +387,14 @@ export function MailMock() {
 
 /* 9 · Carrito que llega por WhatsApp */
 export function CartMock() {
+  return (
+    <div className="mx-auto max-w-[400px]">
+      <CartInner />
+    </div>
+  );
+}
+
+function CartInner() {
   const rows = [
     ["2×", "Tacos de asada (3)", "$178"],
     ["1×", "Agua de horchata", "$35"],

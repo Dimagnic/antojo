@@ -19,7 +19,8 @@ import { BlogCard } from "@/components/landing/BlogCard";
 import {
   CartMock,
   LanguageMock,
-  MailMock,
+  MailEmail,
+  MailPhone,
   MenuToPhoneMock,
   PointsMock,
   PriceMock,
@@ -50,11 +51,12 @@ type Feature = {
   dark?: boolean;
   soon?: boolean;
   tint?: "cream" | "blue" | "green" | "purple" | "rosa";
+  aside?: React.ReactNode;
   mock: React.ReactNode;
 };
 
 // Cuadrícula de escritorio igual a LaCarta: 7/5 · 4/4/4 · 5/7 · 6/6
-const SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-4", "lg:col-span-4", "md:col-span-2 lg:col-span-4", "lg:col-span-5", "lg:col-span-7", "lg:col-span-6", "lg:col-span-6"];
+const SPANS = ["lg:col-span-7", "lg:col-span-5", "lg:col-span-4", "lg:col-span-4", "md:col-span-2 lg:col-span-4", "lg:col-span-5", "lg:col-span-7", "md:col-span-2 lg:col-span-7", "lg:col-span-5"];
 
 const hl = (w: string) => <span className="text-rosa">{w}</span>;
 
@@ -120,15 +122,16 @@ const features: Feature[] = [
     icon: Mail,
     soon: true,
     tint: "blue",
-    title: <>Envía promociones por correo y haz que {hl("vuelvan")}</>,
-    text: "Manda campañas a tus clientes directamente desde tu panel de Antojo, sin contratar servicios externos.",
-    mock: <MailMock />,
+    title: <>Envía promociones por <br className="hidden sm:block" />correo y haz que {hl("vuelvan")}</>,
+    text: "Envía campañas de correo masivas a tus clientes directamente desde el panel de Antojo, sin contratar servicios externos.",
+    mock: <MailEmail />,
+    aside: <MailPhone />,
   },
   {
     pill: "Carrito por WhatsApp",
     icon: ShoppingCart,
     tint: "green",
-    title: <>Recibe pedidos para llevar directo en {hl("WhatsApp")}</>,
+    title: <>Recibe pedidos {hl("para llevar")} <br className="hidden sm:block" />directo en WhatsApp</>,
     text: "Tus clientes arman el carrito desde la carta y te envían el pedido listo por WhatsApp. Menos idas y vueltas, más pedidos organizados.",
     mock: <CartMock />,
   },
@@ -149,10 +152,10 @@ export default function Home() {
       <SiteHeader />
 
       {/* ───── Hero ───── */}
-      <section className="relative px-5 pb-10 pt-40 md:pt-48">
+      <section className="relative px-5 pb-24 pt-40 md:pt-48">
         <div className="pointer-events-none absolute -right-40 top-20 h-[460px] w-[460px] rounded-full bg-rosa/10 blur-3xl" />
         <div className="pointer-events-none absolute -left-40 top-[520px] h-[360px] w-[360px] rounded-full bg-sol/15 blur-3xl" />
-        <div className="relative mx-auto grid max-w-[1300px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative mx-auto grid max-w-[1210px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="anim-fade-up text-center lg:text-left">
               <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff5c7a] px-4 py-1.5 text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
@@ -192,7 +195,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="anim-fade-up relative mx-auto flex items-center lg:mr-6" style={{ animationDelay: "250ms" }}>
+          <div className="anim-fade-up relative mx-auto flex items-center lg:mr-14" style={{ animationDelay: "250ms" }}>
             {/* Reseñas de ejemplo, escalonadas a la izquierda del celular */}
             <div className="relative z-10 -mr-6 hidden h-[420px] w-[270px] lg:block">
               {[
@@ -220,7 +223,7 @@ export default function Home() {
               <p className="absolute bottom-0 left-10 text-[10px] text-tinta-70/70">Reseñas de ejemplo</p>
             </div>
             <div className="relative">
-              <div className="absolute -right-16 -top-10 rotate-[8deg] rounded-2xl bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
+              <div className="absolute -right-10 -top-10 rotate-[8deg] rounded-2xl bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-20 w-20 sm:h-[120px] sm:w-[120px]" />
               </div>
@@ -233,7 +236,7 @@ export default function Home() {
       </section>
 
       {/* ───── Cartas de ejemplo ───── */}
-      <section className="pb-12 pt-6">
+      <section className="pb-12">
         <Reveal className="px-5 text-center">
           <h2 className="text-[20px] font-medium text-tinta-70 md:text-[22px]">
             Así se ve tu carta en <span className="font-bold text-tinta">anto</span>
@@ -243,13 +246,13 @@ export default function Home() {
             Taquerías, cafeterías, bares y restaurantes que quieren vender más con su carta QR.
           </p>
         </Reveal>
-        <Reveal className="mx-auto mt-8 max-w-[1300px]" delay={100}>
+        <Reveal className="mx-auto mt-8 max-w-[1210px]" delay={100}>
           <Showcase />
         </Reveal>
       </section>
 
       {/* ───── Cifras ───── */}
-      <section className="relative z-10 -mt-14 px-5 pb-20">
+      <section className="relative z-10 -mt-14 px-5 pb-28">
         <Reveal className="card-dark mx-auto max-w-[900px] overflow-hidden rounded-[24px] text-white shadow-2xl shadow-tinta/30">
           <div className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
             {stats.map((s) => (
@@ -264,11 +267,11 @@ export default function Home() {
       </section>
 
       {/* ───── Funciones ───── */}
-      <section id="funciones" className="scroll-mt-32 px-5 pb-20">
+      <section id="funciones" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto text-center">
           <h2 className="text-[28px] font-semibold leading-tight tracking-tight md:text-[38px]">Muestra mejor. Vende más. Junta reseñas.</h2>
         </Reveal>
-        <div className="mx-auto mt-10 grid max-w-[1300px] gap-5 md:grid-cols-2 lg:grid-cols-12">
+        <div className="mx-auto mt-10 grid max-w-[1210px] gap-4 md:grid-cols-2 lg:grid-cols-12">
           {features.map((f, i) => (
             <Reveal
               key={f.pill}
@@ -277,6 +280,8 @@ export default function Home() {
                 f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : `tint-${f.tint ?? "rosa"} shadow-[0_20px_50px_-35px_rgba(27,17,48,0.35)]`
               }`}
             >
+              <div className={f.aside ? "grid items-start gap-6 lg:grid-cols-[1fr_auto]" : ""}>
+                <div>
               <div className="flex flex-wrap items-center gap-2">
                 <span
                   className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11.5px] font-medium ${
@@ -290,13 +295,16 @@ export default function Home() {
               <h3 className={`mt-4 font-medium leading-[1.25] tracking-tight ${i === 0 ? "max-w-[420px] text-[26px] md:text-[30px]" : "text-[22px] md:text-[24px]"}`}>{f.title}</h3>
               <p className={`mt-3 max-w-[460px] text-[13.5px] leading-[1.7] ${f.dark ? "text-white/70" : "text-tinta-70"}`}>{f.text}</p>
               {f.mock}
+                </div>
+                {f.aside && <div className="lg:pt-10">{f.aside}</div>}
+              </div>
             </Reveal>
           ))}
         </div>
       </section>
 
       {/* ───── Precios ───── */}
-      <section id="precios" className="scroll-mt-32 px-5 pb-20">
+      <section id="precios" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 className="text-[30px] font-bold leading-tight tracking-tight md:text-[40px]">
             Elige el plan que acompaña el <span className="text-rosa">crecimiento de tu negocio</span>
@@ -309,7 +317,7 @@ export default function Home() {
       </section>
 
       {/* ───── Blog ───── */}
-      <section className="px-5 pb-20">
+      <section className="px-5 pb-28">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-rosa">Blog</p>
           <h2 className="mt-2 text-[30px] font-semibold leading-tight tracking-tight md:text-[44px]">Guías para vender más con tu carta QR</h2>
@@ -317,7 +325,7 @@ export default function Home() {
             Ideas prácticas para atraer clientes desde Google, mejorar tu carta digital y juntar reseñas sin depender de publicidad.
           </p>
         </Reveal>
-        <div className="mx-auto mt-10 grid max-w-[1300px] gap-6 md:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1210px] gap-6 md:grid-cols-3">
           {POSTS.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
               <BlogCard post={p} />
@@ -332,7 +340,7 @@ export default function Home() {
       </section>
 
       {/* ───── Preguntas ───── */}
-      <section id="preguntas" className="scroll-mt-32 px-5 pb-20">
+      <section id="preguntas" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto max-w-3xl">
           <h2 className="text-center text-[30px] font-semibold tracking-tight md:text-[44px]">
             Preguntas <span className="text-rosa">frecuentes</span>
@@ -353,8 +361,8 @@ export default function Home() {
       </section>
 
       {/* ───── Llamado final ───── */}
-      <section className="px-5 pb-20">
-        <Reveal className="relative mx-auto max-w-[1300px] overflow-hidden rounded-[36px] bg-gradient-to-br from-white to-rosa-50 p-8 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.4)] ring-1 ring-tinta/5 md:p-14">
+      <section className="px-5 pb-28">
+        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[36px] bg-gradient-to-br from-white to-rosa-50 p-8 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.4)] ring-1 ring-tinta/5 md:p-14">
           <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-rosa/10" />
           <div className="pointer-events-none absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-sol/15" />
           <div className="relative grid items-center gap-10 md:grid-cols-2">
@@ -380,7 +388,7 @@ export default function Home() {
       </section>
 
       {/* ───── Partners ───── */}
-      <section id="partners" className="scroll-mt-32 px-5 pb-24">
+      <section id="partners" className="scroll-mt-32 px-5 pb-28">
         <Reveal className="mx-auto max-w-3xl rounded-[36px] bg-gradient-to-b from-white to-rosa-50/60 p-8 text-center shadow-[0_30px_80px_-40px_rgba(230,0,126,0.35)] ring-1 ring-rosa-100 md:p-14">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/antojo-logo.svg" alt="Antojo" className="mx-auto h-12 w-auto" />
