@@ -49,6 +49,7 @@ type Feature = {
   text: string;
   dark?: boolean;
   soon?: boolean;
+  tint?: "cream" | "blue" | "green" | "purple" | "rosa";
   mock: React.ReactNode;
 };
 
@@ -62,27 +63,30 @@ const features: Feature[] = [
     pill: "Carta tipo TikTok",
     icon: Smartphone,
     dark: true,
-    title: <>Tu carta deja de ser un PDF y ahora {hl("vende")} por ti</>,
+    title: <>Tu menú deja de ser un PDF y ahora {hl("trabaja")} por ti</>,
     text: "Muestra tus platillos con fotos, videos y precios claros. Menos dudas, más ganas de pedir.",
     mock: <MenuToPhoneMock />,
   },
   {
     pill: "Reseñas automáticas",
     icon: Star,
+    tint: "cream",
     title: <>Convierte cada mesa en una nueva {hl("reseña")}</>,
-    text: "Antojo invita a cada cliente a calificarte en Google Maps justo cuando acaba de disfrutar. Sin pedirlo a mano y sin depender del mesero.",
+    text: "Antojo guía al comensal para dejar su reseña en Google Maps dentro de la experiencia del menú. Sin pedirlo a mano. Sin depender del mesero. Sin que sea incómodo.",
     mock: <ReviewMock />,
   },
   {
     pill: "Datos del negocio",
     icon: BarChart3,
-    title: <>Descubre qué {hl("se antoja")} antes de que pidan</>,
-    text: "Conoce qué platillos llaman más la atención, a qué hora llegan más clientes y qué conviene destacar.",
+    tint: "blue",
+    title: <>Descubre qué {hl("mira")} la gente antes de pedir</>,
+    text: "Conoce qué platillos llaman más la atención, en qué horarios entran más clientes y qué productos deberías destacar.",
     mock: <StatsMock />,
   },
   {
     pill: "Actualización",
     icon: RefreshCw,
+    tint: "green",
     title: <>Cambia {hl("precios")} y platillos sin reimprimir</>,
     text: "Edita productos, fotos, videos y orden desde tu panel. El QR sigue siendo el mismo.",
     mock: <PriceMock />,
@@ -90,8 +94,9 @@ const features: Feature[] = [
   {
     pill: "Clientes de todo el mundo",
     icon: Globe,
-    title: <>Tu carta también habla {hl("inglés")}</>,
-    text: "Tus clientes entienden la carta sin importar de dónde vengan.",
+    tint: "purple",
+    title: <>Tu menú también habla {hl("inglés")}</>,
+    text: "Tus clientes entienden tu menú, sin importar de dónde vengan.",
     mock: <LanguageMock />,
   },
   {
@@ -114,13 +119,15 @@ const features: Feature[] = [
     pill: "Promociones por correo",
     icon: Mail,
     soon: true,
-    title: <>Envía promociones y haz que {hl("vuelvan")}</>,
+    tint: "blue",
+    title: <>Envía promociones por correo y haz que {hl("vuelvan")}</>,
     text: "Manda campañas a tus clientes directamente desde tu panel de Antojo, sin contratar servicios externos.",
     mock: <MailMock />,
   },
   {
     pill: "Carrito por WhatsApp",
     icon: ShoppingCart,
+    tint: "green",
     title: <>Recibe pedidos para llevar directo en {hl("WhatsApp")}</>,
     text: "Tus clientes arman el carrito desde la carta y te envían el pedido listo por WhatsApp. Menos idas y vueltas, más pedidos organizados.",
     mock: <CartMock />,
@@ -145,7 +152,7 @@ export default function Home() {
       <section className="relative px-5 pb-10 pt-40 md:pt-48">
         <div className="pointer-events-none absolute -right-40 top-20 h-[460px] w-[460px] rounded-full bg-rosa/10 blur-3xl" />
         <div className="pointer-events-none absolute -left-40 top-[520px] h-[360px] w-[360px] rounded-full bg-sol/15 blur-3xl" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative mx-auto grid max-w-[1300px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="anim-fade-up text-center lg:text-left">
               <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff5c7a] px-4 py-1.5 text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
@@ -155,22 +162,23 @@ export default function Home() {
             <h1 className="anim-fade-up mt-5 text-[34px] font-semibold leading-[1.2] tracking-tight sm:text-5xl lg:text-[54px]" style={{ animationDelay: "100ms" }}>
               Tu carta QR,
               <br />
-              ahora <RotatingWord words={["trabaja", "vende", "califica"]} /> por <span className="text-rosa">ti.</span>
+              ahora <RotatingWord words={["vende", "trabaja", "califica"]} /> por <span className="text-rosa">ti.</span>
             </h1>
             <p className="anim-fade-up mt-5 max-w-xl text-[17px] leading-relaxed text-tinta/85 lg:text-lg" style={{ animationDelay: "200ms" }}>
-              Cambia tu <span className="text-tinta-70 line-through decoration-rosa decoration-2">PDF aburrido</span> por una{" "}
-              <b className="font-semibold text-rosa">carta interactiva</b> que abre el antojo, vende más y junta reseñas. Sin descargar apps.
+              Transforma tu <span className="font-semibold text-tinta-70 line-through decoration-rosa decoration-2">PDF aburrido</span> en una{" "}
+              <b className="font-semibold text-rosa">experiencia interactiva</b>
+              <br className="hidden lg:block" /> que vende más y consigue reseñas sin descargar nada.
             </p>
             <div className="anim-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "300ms" }}>
               <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-2xl px-8 py-3.5 text-[16px] font-semibold text-white">
-                Crear mi carta gratis <ArrowRight className="h-4 w-4" />
+                Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/demo" className="flex items-center justify-center gap-2 rounded-2xl bg-white px-7 py-3.5 text-[16px] font-semibold text-tinta shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
                 Ver en acción <span className="h-2 w-2 animate-pulse rounded-full bg-rosa" />
               </Link>
             </div>
             <p className="anim-fade-up mt-5 text-[15px] text-tinta-70" style={{ animationDelay: "400ms" }}>
-              <b className="font-semibold text-tinta/80">Prueba gratis</b> de 14 días. No necesitas tarjeta de crédito.
+              <b className="font-semibold text-tinta/80">Prueba gratuita</b> de 14 días. No se requieren datos de tarjeta.
             </p>
             <p className="anim-fade-up mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px]" style={{ animationDelay: "450ms" }}>
               <span className="text-tinta-70">Integración con</span> <b className="font-semibold">Google Maps</b> <span className="text-red-500">📍</span> <span className="text-tinta-70">y</span> <b className="font-semibold">WhatsApp</b>{" "}
@@ -184,33 +192,40 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="anim-fade-up relative mx-auto flex items-center gap-6 lg:mr-0" style={{ animationDelay: "250ms" }}>
-            {/* Reseñas que llegan a Google (ilustración) */}
-            <div className="hidden w-52 flex-col gap-10 xl:flex">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-tinta-70">Ejemplo de reseñas en Google Maps</p>
+          <div className="anim-fade-up relative mx-auto flex items-center lg:mr-6" style={{ animationDelay: "250ms" }}>
+            {/* Reseñas de ejemplo, escalonadas a la izquierda del celular */}
+            <div className="relative z-10 -mr-6 hidden h-[420px] w-[270px] lg:block">
               {[
-                { n: "S", c: "bg-red-500", q: "Muy rica la comida, la atención de 10.", w: "Sofía L.", x: "ml-6" },
-                { n: "J", c: "bg-blue-600", q: "Todo muy rico y el lugar es hermoso.", w: "Javier R.", x: "" },
-                { n: "M", c: "bg-purple-600", q: "Increíble el lugar, volveré pronto.", w: "Mariana D.", x: "ml-4" },
+                { n: "S", c: "bg-red-500", q: "Muy rica la comida, la atención de 10.", w: "Sofía L.", pos: "left-6 top-2" },
+                { n: "J", c: "bg-blue-600", q: "Todo muy rico y el lugar es hermoso.", w: "Javier R.", pos: "left-0 top-[150px]" },
+                { n: "M", c: "bg-purple-600", q: "Increíble el lugar, volveré pronto.", w: "Mariana D.", pos: "left-10 top-[292px]" },
               ].map((r, i) => (
-                <div key={r.w} className={`float-y flex gap-2.5 ${r.x}`} style={{ animationDelay: `${i * 0.8}s` }}>
-                  <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${r.c}`}>{r.n}</span>
-                  <div>
-                    <p className="text-[11px] tracking-widest text-sol">★★★★★</p>
-                    <p className="text-[13px] leading-snug">“{r.q}”</p>
-                    <p className="mt-0.5 text-[11px] text-tinta-70">
-                      {r.w} · <span className="text-red-500">📍</span> Google Maps
-                    </p>
+                <div
+                  key={r.w}
+                  className={`float-y absolute w-[236px] rounded-xl bg-white p-3 shadow-[0_10px_30px_-12px_rgba(27,17,48,0.3)] ring-1 ring-tinta/5 ${r.pos}`}
+                  style={{ animationDelay: `${i * 0.8}s` }}
+                >
+                  <div className="flex gap-2.5">
+                    <span className={`mt-3 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white ${r.c}`}>{r.n}</span>
+                    <div>
+                      <p className="text-[10px] tracking-widest text-sol">★★★★★</p>
+                      <p className="text-[13px] font-medium leading-snug">“{r.q}”</p>
+                      <p className="mt-0.5 text-[10.5px] text-tinta-70">
+                        {r.w} · <span className="text-red-500">📍</span> Google Maps
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
+              <p className="absolute bottom-0 left-10 text-[10px] text-tinta-70/70">Reseñas de ejemplo</p>
             </div>
             <div className="relative">
-              <HeroPhone />
-              <div className="absolute -right-10 -top-8 rotate-6 rounded-2xl bg-white p-2 shadow-xl ring-1 ring-tinta/5 sm:-right-20">
+              <div className="absolute -right-16 -top-10 rotate-[8deg] rounded-2xl bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-16 w-16 sm:h-24 sm:w-24" />
-                <p className="mt-1 text-center text-[9px] font-semibold text-tinta-70">Escanéame</p>
+                <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-20 w-20 sm:h-[120px] sm:w-[120px]" />
+              </div>
+              <div className="relative">
+                <HeroPhone />
               </div>
             </div>
           </div>
@@ -220,28 +235,28 @@ export default function Home() {
       {/* ───── Cartas de ejemplo ───── */}
       <section className="pb-12 pt-6">
         <Reveal className="px-5 text-center">
-          <h2 className="text-[24px] font-medium text-tinta-70 md:text-3xl">
+          <h2 className="text-[20px] font-medium text-tinta-70 md:text-[22px]">
             Así se ve tu carta en <span className="font-bold text-tinta">anto</span>
             <span className="font-bold text-rosa">jo</span>
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-tinta-70">
+          <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-tinta-70">
             Taquerías, cafeterías, bares y restaurantes que quieren vender más con su carta QR.
           </p>
         </Reveal>
-        <Reveal className="mx-auto mt-8 max-w-6xl" delay={100}>
+        <Reveal className="mx-auto mt-8 max-w-[1300px]" delay={100}>
           <Showcase />
         </Reveal>
       </section>
 
       {/* ───── Cifras ───── */}
-      <section className="px-5 pb-20">
-        <Reveal className="card-dark mx-auto max-w-6xl overflow-hidden rounded-[32px] text-white shadow-2xl shadow-tinta/30">
+      <section className="relative z-10 -mt-14 px-5 pb-20">
+        <Reveal className="card-dark mx-auto max-w-[900px] overflow-hidden rounded-[24px] text-white shadow-2xl shadow-tinta/30">
           <div className="grid divide-y divide-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
             {stats.map((s) => (
-              <div key={s.n} className="p-7 md:p-9">
-                <p className="text-[38px] font-bold leading-none text-rosa">{s.n}</p>
-                <p className="mt-3 text-[17px] font-semibold">{s.t}</p>
-                <p className="mt-2 text-[15px] leading-relaxed text-white/65">{s.d}</p>
+              <div key={s.n} className="px-7 py-6">
+                <p className="text-[30px] font-bold leading-none text-rosa">{s.n}</p>
+                <p className="mt-2 text-[14px] font-semibold">{s.t}</p>
+                <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/60">{s.d}</p>
               </div>
             ))}
           </div>
@@ -250,32 +265,30 @@ export default function Home() {
 
       {/* ───── Funciones ───── */}
       <section id="funciones" className="scroll-mt-32 px-5 pb-20">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[32px] font-semibold leading-tight tracking-tight md:text-5xl">
-            Muestra mejor. Vende más. <span className="text-rosa">Junta reseñas.</span>
-          </h2>
+        <Reveal className="mx-auto text-center">
+          <h2 className="text-[28px] font-semibold leading-tight tracking-tight md:text-[38px]">Muestra mejor. Vende más. Junta reseñas.</h2>
         </Reveal>
-        <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-12">
+        <div className="mx-auto mt-10 grid max-w-[1300px] gap-5 md:grid-cols-2 lg:grid-cols-12">
           {features.map((f, i) => (
             <Reveal
               key={f.pill}
               delay={(i % 3) * 110}
-              className={`relative overflow-hidden rounded-[32px] p-7 md:p-9 ${SPANS[i]} ${
-                f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : "card-light grid-dots shadow-[0_20px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5"
+              className={`relative overflow-hidden rounded-[24px] p-7 md:p-8 ${SPANS[i]} ${
+                f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : `tint-${f.tint ?? "rosa"} shadow-[0_20px_50px_-35px_rgba(27,17,48,0.35)]`
               }`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span
-                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium ${
-                    f.dark ? "bg-white/10 text-rosa-100" : "bg-rosa-50 text-rosa"
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11.5px] font-medium ${
+                    f.dark ? "bg-white/10 text-rosa-100" : "pill"
                   }`}
                 >
-                  <f.icon className="h-4 w-4" /> {f.pill}
+                  <f.icon className="h-3.5 w-3.5" /> {f.pill}
                 </span>
                 {f.soon && <span className="rounded-full bg-sol/20 px-2.5 py-1 text-[11px] font-bold text-amber-700">Próximamente</span>}
               </div>
-              <h3 className="mt-5 text-[26px] font-medium leading-[1.2] tracking-tight md:text-[30px]">{f.title}</h3>
-              <p className={`mt-4 text-[15px] leading-[1.75] ${f.dark ? "text-white/70" : "text-tinta-70"}`}>{f.text}</p>
+              <h3 className={`mt-4 font-medium leading-[1.25] tracking-tight ${i === 0 ? "max-w-[420px] text-[26px] md:text-[30px]" : "text-[22px] md:text-[24px]"}`}>{f.title}</h3>
+              <p className={`mt-3 max-w-[460px] text-[13.5px] leading-[1.7] ${f.dark ? "text-white/70" : "text-tinta-70"}`}>{f.text}</p>
               {f.mock}
             </Reveal>
           ))}
@@ -304,7 +317,7 @@ export default function Home() {
             Ideas prácticas para atraer clientes desde Google, mejorar tu carta digital y juntar reseñas sin depender de publicidad.
           </p>
         </Reveal>
-        <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-[1300px] gap-6 md:grid-cols-3">
           {POSTS.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
               <BlogCard post={p} />
@@ -341,7 +354,7 @@ export default function Home() {
 
       {/* ───── Llamado final ───── */}
       <section className="px-5 pb-20">
-        <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-gradient-to-br from-white to-rosa-50 p-8 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.4)] ring-1 ring-tinta/5 md:p-14">
+        <Reveal className="relative mx-auto max-w-[1300px] overflow-hidden rounded-[36px] bg-gradient-to-br from-white to-rosa-50 p-8 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.4)] ring-1 ring-tinta/5 md:p-14">
           <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-rosa/10" />
           <div className="pointer-events-none absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-sol/15" />
           <div className="relative grid items-center gap-10 md:grid-cols-2">

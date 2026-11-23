@@ -34,7 +34,7 @@ export function SiteHeader() {
     <div className="fixed inset-x-0 top-0 z-50">
       {/* Barra promocional */}
       <div className="bg-gradient-to-r from-rosa via-[#ff2f92] to-[#ff5c7a] shadow-[0_6px_24px_-8px_rgba(230,0,126,0.6)]">
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-3 px-4 py-2 text-[13px] font-semibold text-white">
+        <div className="mx-auto flex max-w-[1300px] items-center justify-center gap-3 px-4 py-2 text-[13px] font-semibold text-white">
           <span>Prueba Pro 14 días gratis</span>
           <Link
             href="/registro"
@@ -48,7 +48,7 @@ export function SiteHeader() {
       {/* Encabezado flotante: se vuelve translúcido al bajar */}
       <div className="px-4 pt-3 sm:px-6">
         <div
-          className={`mx-auto max-w-6xl rounded-[28px] transition-all duration-500 ${
+          className={`mx-auto max-w-[1300px] rounded-[28px] transition-all duration-500 ${
             scrolled || open
               ? "bg-white/65 shadow-[0_8px_32px_-12px_rgba(27,17,48,0.25)] ring-1 ring-white/60 backdrop-blur-xl backdrop-saturate-150"
               : "bg-white shadow-[0_10px_40px_-16px_rgba(27,17,48,0.2)]"
@@ -89,7 +89,7 @@ export function SiteHeader() {
 
         {/* Menú hamburguesa */}
         <div
-          className={`mx-auto mt-2 max-w-6xl origin-top overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 transition-all duration-300 lg:hidden ${
+          className={`mx-auto mt-2 max-w-[1300px] origin-top overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 transition-all duration-300 lg:hidden ${
             open ? "max-h-[480px] scale-100 opacity-100" : "pointer-events-none max-h-0 scale-95 opacity-0"
           }`}
         >

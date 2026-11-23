@@ -5,14 +5,14 @@ import { ChevronRight } from "lucide-react";
 import { PHOTOS, photo } from "@/lib/site";
 
 const cards = [
-  { type: "Taquería", chips: ["Tacos", "Tortas", "Bebidas"], img2: PHOTOS.burrito, img: PHOTOS.tacos, name: "Tacos de asada (3)", price: "$89" },
-  { type: "Cafetería", chips: ["Café", "Pan dulce", "Desayunos"], img2: PHOTOS.donut, img: PHOTOS.latte, name: "Latte de la casa", price: "$55" },
-  { type: "Sushi", chips: ["Rollos", "Entradas", "Bebidas"], img2: PHOTOS.sushi, img: PHOTOS.sushiRolls, name: "Roll philadelphia", price: "$159" },
-  { type: "Pizzería", chips: ["Pizzas", "Pastas", "Postres"], img2: PHOTOS.pasta, img: PHOTOS.pizzaPepperoni, name: "Pizza pepperoni", price: "$199" },
-  { type: "Hamburguesas", chips: ["Burgers", "Papas", "Malteadas"], img2: PHOTOS.burgerDouble, img: PHOTOS.burger, name: "Burger Antojo", price: "$169" },
-  { type: "Cortes", chips: ["Cortes", "Guarniciones", "Vinos"], img2: PHOTOS.steakSalad, img: PHOTOS.steak, name: "Corte al fuego", price: "$289" },
-  { type: "Bar", chips: ["Coctelería", "Cerveza", "Botanas"], img2: PHOTOS.beer, img: PHOTOS.cocktail, name: "Mezcalita de la casa", price: "$129" },
-  { type: "Postres", chips: ["Pasteles", "Donas", "Café"], img2: PHOTOS.donut, img: PHOTOS.cake, name: "Pastel de chocolate", price: "$89" },
+  { type: "Taquería", emoji: "🌮", chips: ["Tacos", "Tortas", "Bebidas"], img2: PHOTOS.burrito, img: PHOTOS.tacos, name: "Tacos de asada (3)", price: "$89" },
+  { type: "Cafetería", emoji: "☕", chips: ["Café", "Pan dulce", "Desayunos"], img2: PHOTOS.donut, img: PHOTOS.latte, name: "Latte de la casa", price: "$55" },
+  { type: "Sushi", emoji: "🍣", chips: ["Rollos", "Entradas", "Bebidas"], img2: PHOTOS.sushi, img: PHOTOS.sushiRolls, name: "Roll philadelphia", price: "$159" },
+  { type: "Pizzería", emoji: "🍕", chips: ["Pizzas", "Pastas", "Postres"], img2: PHOTOS.pasta, img: PHOTOS.pizzaPepperoni, name: "Pizza pepperoni", price: "$199" },
+  { type: "Hamburguesas", emoji: "🍔", chips: ["Burgers", "Papas", "Malteadas"], img2: PHOTOS.burgerDouble, img: PHOTOS.burger, name: "Burger Antojo", price: "$169" },
+  { type: "Cortes", emoji: "🥩", chips: ["Cortes", "Guarniciones", "Vinos"], img2: PHOTOS.steakSalad, img: PHOTOS.steak, name: "Corte al fuego", price: "$289" },
+  { type: "Bar", emoji: "🍸", chips: ["Coctelería", "Cerveza", "Botanas"], img2: PHOTOS.beer, img: PHOTOS.cocktail, name: "Mezcalita de la casa", price: "$129" },
+  { type: "Postres", emoji: "🍰", chips: ["Pasteles", "Donas", "Café"], img2: PHOTOS.donut, img: PHOTOS.cake, name: "Pastel de chocolate", price: "$89" },
 ];
 
 /** Carrusel de cartas de ejemplo: se mueve solo y se pausa al pasar el dedo o el ratón. */
@@ -28,12 +28,15 @@ export function Showcase() {
   return (
     <div className="relative">
       <div ref={wrap} className="no-scrollbar overflow-x-auto lg:overflow-visible">
-        <div className="marquee flex w-max gap-4 px-4 py-4 lg:w-full lg:justify-center">
+        <div className="marquee flex w-max gap-4 px-4 py-4 lg:w-full lg:justify-center lg:gap-7">
           {loop.map((c, i) => (
-            <figure key={i} className={`w-[170px] shrink-0 ${i >= 6 ? "lg:hidden" : ""}`}>
-              <figcaption className="mb-2 text-center text-[15px] font-bold text-rosa">{c.type}</figcaption>
-              <div className="overflow-hidden rounded-[1.6rem] bg-black p-1.5 shadow-[0_18px_40px_-20px_rgba(27,17,48,0.6)]">
-                <div className="relative aspect-[9/17] overflow-hidden rounded-[1.3rem]">
+            <figure key={i} className={`w-[170px] shrink-0 lg:w-[186px] ${i >= 5 ? "lg:hidden" : ""}`}>
+              <figcaption className="mb-3 flex h-9 items-center justify-center gap-1.5 text-[15px] font-extrabold tracking-tight text-rosa">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-rosa-50 text-[14px]">{c.emoji}</span>
+                {c.type}
+              </figcaption>
+              <div className="overflow-hidden rounded-[1.4rem] bg-black p-1 shadow-[0_18px_40px_-20px_rgba(27,17,48,0.6)]">
+                <div className="relative aspect-[9/16] overflow-hidden rounded-[1.2rem]">
                   {/* eslint-disable @next/next/no-img-element */}
                   {[c.img, c.img2].map((src, k) => (
                     <img

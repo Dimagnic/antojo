@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ArrowRight,
   Check,
   Clock,
   Eye,
@@ -54,50 +53,63 @@ function useCountUp(target: number, active: boolean, ms = 1400) {
   return v;
 }
 
-/* 1 · De PDF a carta tipo TikTok */
+/* 1 · De menú genérico a carta tipo TikTok */
 export function MenuToPhoneMock() {
+  const rows = [
+    ["Entradas", [["Provoleta", "$95"], ["Sopa del día", "$75"]]],
+    ["Platos fuertes", [["Milanesa", "$185"], ["Pasta boloñesa", "$159"]]],
+    ["Bebidas", [["Agua natural", "$35"]]],
+  ] as const;
   return (
-    <div className="mt-8 flex items-end justify-center gap-4">
-      <div className="relative w-[120px] rotate-[-4deg]">
-        <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2.5 py-0.5 text-[10px] font-medium text-tinta shadow">
-          Carta en PDF
-        </span>
-        <div className="rounded-2xl bg-white p-3 text-[7px] leading-[1.6] text-tinta shadow-xl">
-          <p className="mb-1 text-center text-[9px] font-bold tracking-widest">MENÚ</p>
-          {["Entradas", "Platos fuertes", "Bebidas"].map((s) => (
-            <div key={s} className="mb-1.5">
-              <p className="font-bold">{s}</p>
-              <p className="flex justify-between text-tinta-70">
-                <span>Platillo 1</span>
-                <span>$95</span>
-              </p>
-              <p className="flex justify-between text-tinta-70">
-                <span>Platillo 2</span>
-                <span>$120</span>
-              </p>
-            </div>
-          ))}
+    <div className="mt-6 flex items-center justify-center gap-5 sm:gap-8">
+      <div className="flex flex-col items-center">
+        <span className="mb-2 rounded-full bg-white/90 px-3 py-0.5 text-[10px] font-medium text-tinta shadow">Menú genérico</span>
+        <div className="w-[118px] rounded-[1.4rem] bg-[#e9e9ee] p-1.5 shadow-xl sm:w-[132px]">
+          <div className="aspect-[9/17] overflow-hidden rounded-[1.1rem] bg-white px-2.5 pt-3 text-tinta">
+            <div className="mx-auto mb-2 h-1 w-8 rounded-full bg-tinta/15" />
+            <p className="mb-2 text-center text-[9px] font-bold tracking-[0.2em]">MENÚ</p>
+            {rows.map(([sec, items]) => (
+              <div key={sec} className="mb-1.5 border-t border-tinta/10 pt-1.5">
+                <p className="text-[6.5px] font-bold">{sec}</p>
+                {items.map(([n, p]) => (
+                  <p key={n} className="flex justify-between text-[6px] text-tinta-70">
+                    <span>{n}</span>
+                    <span>{p}</span>
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <ArrowRight className="mb-20 h-7 w-7 shrink-0 text-rosa" />
-      <div className="relative w-[140px] overflow-hidden rounded-[1.6rem] bg-black p-1.5 shadow-2xl ring-1 ring-white/10">
-        <div className="relative aspect-[9/17] overflow-hidden rounded-[1.25rem]">
+      <svg viewBox="0 0 60 20" className="w-12 shrink-0 text-rosa sm:w-16" aria-hidden>
+        <path d="M0 10 H54 M46 3 L55 10 L46 17" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+      <div className="w-[138px] rounded-[1.6rem] bg-black p-1.5 shadow-2xl ring-1 ring-white/10 sm:w-[156px]">
+        <div className="relative aspect-[9/18] overflow-hidden rounded-[1.25rem]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img(PHOTOS.burgerDouble, 400, 760)} alt="Hamburguesa doble" className="kb-hero h-full w-full object-cover" style={vivid} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30" />
-          <div className="absolute left-1.5 top-1.5 flex gap-1 text-[6px] font-semibold">
-            <span className="rounded-full bg-rosa px-1.5 py-0.5 text-white">Principales</span>
-            <span className="rounded-full bg-black/40 px-1.5 py-0.5 text-white">Bebidas</span>
+          <img src={img(PHOTOS.burgerDouble, 420, 840)} alt="Hamburguesa doble cheddar" className="kb-hero h-full w-full object-cover" style={vivid} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/40" />
+          <div className="absolute inset-x-1.5 top-1.5 flex gap-1 overflow-hidden text-[5.5px] font-semibold">
+            <span className="shrink-0 rounded-full bg-rosa px-1.5 py-0.5 text-white">Principales</span>
+            <span className="shrink-0 rounded-full bg-black/45 px-1.5 py-0.5 text-white">Ensaladas</span>
+            <span className="shrink-0 rounded-full bg-black/45 px-1.5 py-0.5 text-white">Bebidas</span>
           </div>
-          <div className="absolute right-1.5 top-1/2 flex flex-col gap-1.5 text-white">
+          <div className="absolute right-1.5 top-[48%] flex flex-col gap-1.5 text-white">
             <Heart className="h-3 w-3" />
             <MessageCircle className="h-3 w-3" />
             <Share2 className="h-3 w-3" />
           </div>
           <div className="absolute inset-x-0 bottom-0 p-2 text-white">
-            <span className="rounded-full bg-rosa px-1.5 py-0.5 text-[7px] font-bold">$199</span>
-            <p className="mt-1 text-[9px] font-bold">Doble cheddar</p>
-            <p className="text-[6.5px] text-white/70">Doble carne y queso fundido.</p>
+            <div className="flex items-center gap-1">
+              <span className="rounded-full bg-rosa px-1.5 py-0.5 text-[7px] font-bold">$199</span>
+              <span className="flex items-center gap-0.5 rounded-full bg-black/40 px-1.5 py-0.5 text-[6px]">
+                Agregar <ShoppingCart className="h-2 w-2" />
+              </span>
+            </div>
+            <p className="mt-1 text-[9px] font-bold">Burger doble cheddar</p>
+            <p className="text-[6px] leading-snug text-white/70">Doble carne, doble cheddar fundido, tocino y salsa de la casa.</p>
+            <div className="mx-auto mt-1.5 h-0.5 w-10 rounded-full bg-white/40" />
           </div>
         </div>
       </div>
@@ -105,28 +117,50 @@ export function MenuToPhoneMock() {
   );
 }
 
-/* 2 · Invitación a reseñar */
+/* 2 · Invitación a reseñar dentro de la carta */
 export function ReviewMock() {
   return (
-    <div className="relative mt-8 overflow-hidden rounded-2xl bg-black shadow-2xl">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={img(PHOTOS.sushi, 900, 560)} alt="Sushi" className="h-64 w-full object-cover opacity-60 sm:h-72" style={vivid} />
-      <div className="absolute left-3 top-3 rounded-full bg-black/50 px-3 py-1 text-[11px] font-medium text-white">Principales</div>
-      <div className="absolute inset-x-6 top-1/2 -translate-y-1/2 rounded-2xl bg-[#140c22]/90 p-4 text-center text-white ring-1 ring-white/10 backdrop-blur-md">
-        <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-sol/25">
-          <Star className="h-5 w-5 fill-sol text-sol" />
+    <div className="mt-6 flex justify-center">
+      <div className="relative w-full max-w-[330px] overflow-hidden rounded-2xl bg-black shadow-2xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={img(PHOTOS.sushiBlack, 700, 520)} alt="Roll de pescado" className="aspect-[4/3] w-full object-cover opacity-55" style={vivid} />
+        <div className="absolute inset-x-2.5 top-2.5 flex items-center justify-between">
+          <span className="rounded-full bg-black/55 px-2 py-0.5 text-[8px] font-medium text-white">Principales</span>
+          <Menu />
         </div>
-        <p className="mt-2 text-[15px] font-semibold">¿Qué tal tu experiencia?</p>
-        <p className="mx-auto mt-1 max-w-[240px] text-[11px] text-white/70">Tu opinión en Google Maps nos ayuda muchísimo.</p>
-        <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-[11px] font-semibold text-tinta">
-          Dejar reseña en Google Maps <span className="text-red-500">📍</span>
-        </span>
-      </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 text-white/80">
-        <span className="rounded-full bg-rosa/80 px-2 py-0.5 text-[10px] font-bold">$169</span>
-        <p className="mt-1 text-sm font-semibold">Roll de salmón y aguacate</p>
+        <div className="anim-pop absolute left-1/2 top-[42%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#141019]/95 px-3 pb-3 pt-5 text-center text-white ring-1 ring-white/10">
+          <span className="absolute left-1/2 top-0 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#2a2433] ring-2 ring-[#141019]">
+            <Star className="h-3 w-3 fill-sol text-sol" />
+          </span>
+          <span className="absolute right-2 top-1.5 text-[8px] text-white/50">✕</span>
+          <p className="text-[10.5px] font-semibold">¿Te gustó la experiencia?</p>
+          <p className="mx-auto mt-0.5 max-w-[180px] text-[7.5px] leading-snug text-white/65">Ayúdanos con una reseña rápida en Google Maps. ¡Nos ayuda mucho!</p>
+          <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-[8px] font-semibold text-tinta">
+            Dejar reseña en Google Maps <span className="text-red-500">📍</span>
+          </span>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-3 pb-2.5 pt-8 text-white">
+          <div className="flex items-center gap-1">
+            <span className="rounded-full bg-rosa px-1.5 py-0.5 text-[7px] font-bold">$169</span>
+            <span className="flex items-center gap-0.5 rounded-full bg-black/40 px-1.5 py-0.5 text-[6.5px]">
+              Agregar <ShoppingCart className="h-2 w-2" />
+            </span>
+          </div>
+          <p className="mt-1 text-[10px] font-semibold">Roll de pescado</p>
+          <p className="text-[7px] text-white/65">Salmón fresco, aguacate y salsa de la casa.</p>
+        </div>
       </div>
     </div>
+  );
+}
+
+function Menu() {
+  return (
+    <span className="flex flex-col gap-[2px]" aria-hidden>
+      <span className="h-[1.5px] w-2.5 rounded bg-white" />
+      <span className="h-[1.5px] w-2.5 rounded bg-white" />
+      <span className="h-[1.5px] w-2.5 rounded bg-white" />
+    </span>
   );
 }
 
