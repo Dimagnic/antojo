@@ -290,7 +290,7 @@ export function WheelMock() {
     <div className="mt-8">
       <div className="relative mx-auto aspect-square w-full max-w-[300px]">
         <span className="absolute left-1/2 top-[-6px] z-10 -translate-x-1/2 text-3xl drop-shadow">▼</span>
-        <div className="spin-slow h-full w-full rounded-full p-2 ring-8 ring-white/5" style={{ background: "conic-gradient(#e6007e 0 45deg,#2a1d3d 45deg 90deg,#ff4fa8 90deg 135deg,#2a1d3d 135deg 180deg,#c4006b 180deg 225deg,#2a1d3d 225deg 270deg,#ffb800 270deg 315deg,#2a1d3d 315deg 360deg)" }}>
+        <div className="spin-slow h-full w-full rounded-full p-2 ring-8 ring-white/5" style={{ background: "conic-gradient(#e11d2e 0 45deg,#2a1d3d 45deg 90deg,#ff5a4f 90deg 135deg,#2a1d3d 135deg 180deg,#b9101f 180deg 225deg,#2a1d3d 225deg 270deg,#ffb800 270deg 315deg,#2a1d3d 315deg 360deg)" }}>
           {icons.map((ic, n) => (
             <span
               key={n}

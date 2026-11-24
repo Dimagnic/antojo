@@ -364,8 +364,8 @@ function MetricsScene() {
         <p className="mt-3 text-[11px] font-semibold">Tráfico de la carta</p>
         <p className="text-[7.5px] text-tinta-70">Visitas a tu carta a lo largo del tiempo y horas de más demanda.</p>
         <svg viewBox="0 0 200 80" className="mt-2 w-full">
-          <path d={`${d} L200 80 L0 80 Z`} fill="#e6007e" fillOpacity="0.12" className="anim-fade" />
-          <path d={d} fill="none" stroke="#e6007e" strokeWidth="1.5" className="draw-line" />
+          <path d={`${d} L200 80 L0 80 Z`} fill="#e11d2e" fillOpacity="0.12" className="anim-fade" />
+          <path d={d} fill="none" stroke="#e11d2e" strokeWidth="1.5" className="draw-line" />
         </svg>
         <div className="flex justify-between text-[6.5px] text-tinta-70">
           <span>1 nov</span>

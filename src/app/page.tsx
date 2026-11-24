@@ -158,7 +158,7 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-[1210px] items-center gap-6 md:gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <div className="anim-fade-up text-center lg:text-left">
-              <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff5c7a] px-3 py-1 text-[11px] md:px-4 md:py-1.5 md:text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
+              <span className="inline-block rounded-full bg-gradient-to-r from-rosa to-[#ff6a3d] px-3 py-1 text-[11px] md:px-4 md:py-1.5 md:text-[14px] font-semibold text-white shadow-md shadow-rosa/30">
                 Carta QR tipo TikTok
               </span>
             </div>
@@ -389,7 +389,7 @@ export default function Home() {
 
       {/* ───── Partners ───── */}
       <section id="partners" className="scroll-mt-32 px-5 pb-28">
-        <Reveal className="mx-auto max-w-3xl rounded-[36px] bg-gradient-to-b from-white to-rosa-50/60 p-8 text-center shadow-[0_30px_80px_-40px_rgba(230,0,126,0.35)] ring-1 ring-rosa-100 md:p-14">
+        <Reveal className="mx-auto max-w-3xl rounded-[36px] bg-gradient-to-b from-white to-rosa-50/60 p-8 text-center shadow-[0_30px_80px_-40px_rgba(225,29,46,0.35)] ring-1 ring-rosa-100 md:p-14">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/antojo-logo.svg" alt="Antojo" className="mx-auto h-12 w-auto" />
           <p className="mt-2 text-[13px] font-semibold uppercase tracking-[0.4em] text-tinta">Partners</p>

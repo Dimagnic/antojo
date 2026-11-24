@@ -51,7 +51,7 @@ export default async function PostPage({ params }: Props) {
             ),
           )}
         </article>
-        <div className="mt-12 rounded-3xl bg-gradient-to-br from-rosa to-[#ff5c7a] p-8 text-center text-white">
+        <div className="mt-12 rounded-3xl bg-gradient-to-br from-rosa to-[#ff6a3d] p-8 text-center text-white">
           <p className="text-2xl font-semibold">¿Lista tu carta en 5 minutos?</p>
           <Link href="/registro" className="mt-4 inline-block rounded-full bg-white px-6 py-3 font-semibold text-rosa">
             Crear mi carta gratis

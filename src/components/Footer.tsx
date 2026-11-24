@@ -31,7 +31,7 @@ export function Footer() {
         aria-hidden
         className="h-6 w-full"
         style={{
-          backgroundColor: "#e6007e",
+          backgroundColor: "#e11d2e",
           backgroundImage:
             "radial-gradient(circle at 12px 0, #1b1130 7px, transparent 7.5px), radial-gradient(circle at 12px 24px, #ffb800 3px, transparent 3.5px)",
           backgroundSize: "24px 24px",

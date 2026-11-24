@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-rosa: #e6007e;
-  --color-rosa-50: #fff0f7;
-  --color-rosa-100: #ffd9ec;
-  --color-rosa-600: #c4006b;
+  --color-rosa: #e11d2e;
+  --color-rosa-50: #fff1f0;
+  --color-rosa-100: #ffdad8;
+  --color-rosa-600: #b9101f;
   --color-sol: #ffb800;
   --color-tinta: #1b1130;
   --color-tinta-70: #4a4160;
-  --color-crema: #fff7fb;
+  --color-crema: #fff8f6;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -88,8 +88,8 @@ body {
 .btn-primary {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(100deg, #e6007e 0%, #ff2f92 55%, #ff5c7a 100%);
-  box-shadow: 0 10px 30px -10px rgb(230 0 126 / 0.55);
+  background: linear-gradient(100deg, #e11d2e 0%, #f2362f 55%, #ff6a3d 100%);
+  box-shadow: 0 10px 30px -10px rgb(225 29 46 / 0.55);
 }
 .btn-primary::after {
   content: "";
@@ -103,12 +103,12 @@ body {
 
 .card-dark {
   background:
-    radial-gradient(120% 80% at 100% 100%, rgb(230 0 126 / 0.35), transparent 55%),
+    radial-gradient(120% 80% at 100% 100%, rgb(225 29 46 / 0.35), transparent 55%),
     radial-gradient(80% 60% at 0% 0%, rgb(255 184 0 / 0.08), transparent 60%),
     #150d24;
 }
 .card-light {
-  background: linear-gradient(160deg, #ffffff 0%, #fff6fa 100%);
+  background: linear-gradient(160deg, #ffffff 0%, #fff7f6 100%);
 }
 .grid-dots {
   background-image: radial-gradient(rgb(27 17 48 / 0.06) 1px, transparent 1px);
@@ -155,7 +155,7 @@ body {
 
 /* Tarjetas claras de funciones, con tinte como en LaCarta */
 .tint-rosa, .tint-cream, .tint-blue, .tint-green, .tint-purple { border: 1px solid var(--tb); background: var(--tbg); }
-.tint-rosa { --tb: #ffd9ec; --tbg: linear-gradient(160deg, #fff 0%, #fff6fa 100%); --pb: #ffe6f2; --pc: #c4006b; }
+.tint-rosa { --tb: #ffdad8; --tbg: linear-gradient(160deg, #fff 0%, #fff7f6 100%); --pb: #ffe7e5; --pc: #b9101f; }
 .tint-cream {
   --tb: #f5dcc0; --pb: #fdebd3; --pc: #b5530e;
   --tbg: repeating-linear-gradient(135deg, rgb(181 83 14 / 0.035) 0 2px, transparent 2px 14px), linear-gradient(160deg, #fffdf8, #fdf6ea);

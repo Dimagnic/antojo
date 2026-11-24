@@ -14,7 +14,7 @@ export function RotatingWord({ words, interval = 2200 }: { words: string[]; inte
     <span className="relative inline-block align-bottom">
       {/* Reserva el ancho de la palabra más larga para que el título no brinque */}
       <span className="invisible">{longest}</span>
-      <span key={i} className="word-in absolute left-0 top-0 bg-gradient-to-r from-rosa to-[#ff5c7a] bg-clip-text text-transparent">
+      <span key={i} className="word-in absolute left-0 top-0 bg-gradient-to-r from-rosa to-[#ff6a3d] bg-clip-text text-transparent">
         {words[i]}
       </span>
     </span>

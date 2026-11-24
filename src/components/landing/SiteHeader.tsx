@@ -33,7 +33,7 @@ export function SiteHeader() {
   return (
     <div className="fixed inset-x-0 top-0 z-50">
       {/* Barra promocional */}
-      <div className="bg-gradient-to-r from-rosa via-[#ff2f92] to-[#ff5c7a] shadow-[0_6px_24px_-8px_rgba(230,0,126,0.6)]">
+      <div className="bg-gradient-to-r from-rosa via-[#f2362f] to-[#ff6a3d] shadow-[0_6px_24px_-8px_rgba(225,29,46,0.6)]">
         <div className="mx-auto flex max-w-[1210px] items-center justify-center gap-3 px-4 py-1.5 text-[11.5px] font-semibold text-white md:py-2 md:text-[13px]">
           <span>Prueba Pro 14 días gratis</span>
           <Link

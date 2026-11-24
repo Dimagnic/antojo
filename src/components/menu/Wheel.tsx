@@ -8,7 +8,7 @@ import type { Dict } from "./i18n";
 export const SEGMENTS = [100, 0, 20, 1000, 0, 20, 100, 0, 20, 1000, 0, 20];
 // Probabilidad de cada premio (se reparte entre sus casillas)
 const ODDS: Record<number, number> = { 0: 0.42, 20: 0.4, 100: 0.16, 1000: 0.02 };
-const COLORS = ["#e6007e", "#2a1d3d", "#ff4fa8", "#c4006b", "#2a1d3d", "#ffb800"];
+const COLORS = ["#e11d2e", "#2a1d3d", "#ff5a4f", "#b9101f", "#2a1d3d", "#ffb800"];
 
 function pickIndex() {
   const r = Math.random();
@@ -66,7 +66,7 @@ export function Wheel({
         <div className="absolute left-1/2 top-[-6px] z-10 -translate-x-1/2 drop-shadow-lg">
           <svg width="34" height="40" viewBox="0 0 34 40">
             <path d="M17 38 3 8a14 14 0 1 1 28 0Z" fill="#fff" />
-            <circle cx="17" cy="13" r="5" fill="#e6007e" />
+            <circle cx="17" cy="13" r="5" fill="#e11d2e" />
           </svg>
         </div>
         <svg
@@ -110,7 +110,7 @@ export function Wheel({
             const [x, y] = polar(i * 15, 146);
             return <circle key={i} cx={x} cy={y} r="2.6" fill={i % 2 ? "#ffb800" : "#ffffff"} className={spinning ? "animate-pulse" : ""} />;
           })}
-          <circle cx="150" cy="150" r="30" fill="#1b1130" stroke="#e6007e" strokeWidth="5" />
+          <circle cx="150" cy="150" r="30" fill="#1b1130" stroke="#e11d2e" strokeWidth="5" />
         </svg>
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <Gift className="h-7 w-7 text-sol" />
