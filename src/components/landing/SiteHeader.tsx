@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { LoginModal } from "@/components/LoginModal";
 import { ArrowRight, Menu, X } from "lucide-react";
 
 const links = [
@@ -15,6 +16,8 @@ const links = [
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [login, setLogin] = useState(false);
+  const closeLogin = useCallback(() => setLogin(false), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -68,9 +71,9 @@ export function SiteHeader() {
               ))}
             </nav>
             <div className="hidden items-center gap-2 lg:flex">
-              <Link href="/entrar" className="rounded-lg bg-white px-3.5 py-1.5 text-[15px] font-medium ring-1 ring-tinta/15 transition hover:bg-crema">
+              <button onClick={() => setLogin(true)} className="rounded-lg bg-white px-3.5 py-1.5 text-[15px] font-medium ring-1 ring-tinta/15 transition hover:bg-crema">
                 Iniciar sesión
-              </Link>
+              </button>
               <Link href="/registro" className="rounded-lg bg-rosa px-3.5 py-1.5 text-[15px] font-semibold text-white transition hover:bg-rosa-600">
                 Probar gratis
               </Link>
@@ -108,19 +111,22 @@ export function SiteHeader() {
           </nav>
           <div className="mx-4 mt-2 border-t border-tinta/10" />
           <div className="space-y-2 p-4">
-            <Link
-              href="/entrar"
-              onClick={() => setOpen(false)}
-              className="block rounded-2xl py-3 text-center font-medium text-tinta-70 ring-1 ring-tinta/10"
+            <button
+              onClick={() => {
+                setOpen(false);
+                setLogin(true);
+              }}
+              className="block w-full rounded-2xl py-3 text-center font-medium text-tinta-70 ring-1 ring-tinta/10"
             >
               Iniciar sesión
-            </Link>
+            </button>
             <Link href="/registro" onClick={() => setOpen(false)} className="btn-primary block rounded-2xl py-3 text-center font-semibold text-white">
               Probar gratis
             </Link>
           </div>
         </div>
       </div>
+      <LoginModal open={login} onClose={closeLogin} />
     </div>
   );
 }
