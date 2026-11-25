@@ -1,6 +1,6 @@
 // ── Datos de contacto de Antojo (edítalos aquí; se usan en todo el sitio) ──
 export const SITE = {
-  whatsapp: "", // ej. "522291234567" (solo dígitos, con lada de país)
+  whatsapp: "522224903701", // solo dígitos, con lada de país (52 = México)
   email: "", // ej. "hola@antojo.mx"
   instagram: "", // ej. "https://instagram.com/antojo.mx"
   facebook: "",

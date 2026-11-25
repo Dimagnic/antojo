@@ -68,10 +68,10 @@ export function SiteHeader() {
               ))}
             </nav>
             <div className="hidden items-center gap-2 lg:flex">
-              <Link href="/entrar" className="rounded-full px-4 py-2 text-[15px] font-medium hover:bg-rosa-50">
+              <Link href="/entrar" className="rounded-lg bg-white px-3.5 py-1.5 text-[15px] font-medium ring-1 ring-tinta/15 transition hover:bg-crema">
                 Iniciar sesión
               </Link>
-              <Link href="/registro" className="btn-primary rounded-full px-5 py-2.5 text-[15px] font-semibold text-white">
+              <Link href="/registro" className="rounded-lg bg-rosa px-3.5 py-1.5 text-[15px] font-semibold text-white transition hover:bg-rosa-600">
                 Probar gratis
               </Link>
             </div>

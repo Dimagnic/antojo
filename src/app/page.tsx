@@ -4,7 +4,7 @@ import {
   BarChart3,
   Gamepad2,
   Globe,
-  Handshake,
+  ArrowUpRight,
   Mail,
   MessageCircle,
   RefreshCw,
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { ClienteAIWidget } from "@/components/ClienteAIWidget";
 import { Footer } from "@/components/Footer";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { BlogCard } from "@/components/landing/BlogCard";
 import {
   CartMock,
@@ -346,14 +347,14 @@ export default function Home() {
             Preguntas <span className="text-rosa">frecuentes</span>
           </h2>
           <p className="mt-3 text-center text-[16px] text-tinta-70">Resolvemos tus dudas sobre tu nueva carta estilo TikTok.</p>
-          <div className="mt-8 divide-y divide-tinta/10 border-y border-tinta/10">
+          <div className="mx-auto mt-8 max-w-[690px] divide-y divide-tinta/10 md:mt-10">
             {faqs.map(([q, a]) => (
-              <details key={q} name="preguntas" className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-medium">
+              <details key={q} name="preguntas" className="group py-3 md:py-3.5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[13px] text-tinta md:text-[15px]">
                   {q}
-                  <span className="text-xl text-tinta-70 transition group-open:rotate-45">+</span>
+                  <span className="text-[16px] font-light text-tinta-70 transition group-open:rotate-45">+</span>
                 </summary>
-                <p className="mt-3 text-[15px] leading-relaxed text-tinta-70">{a}</p>
+                <p className="mt-2 pr-8 text-[12.5px] leading-relaxed text-tinta-70 md:text-[14px]">{a}</p>
               </details>
             ))}
           </div>
@@ -362,23 +363,23 @@ export default function Home() {
 
       {/* ───── Llamado final ───── */}
       <section className="px-5 pb-28">
-        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[36px] bg-gradient-to-br from-white to-rosa-50 p-8 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.4)] ring-1 ring-tinta/5 md:p-14">
-          <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-rosa/10" />
-          <div className="pointer-events-none absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-sol/15" />
-          <div className="relative grid items-center gap-10 md:grid-cols-2">
+        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-[#fbf8f5] to-[#f6f1ec] px-6 py-10 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 md:px-12 md:py-14">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-tinta/[0.03]" />
+          <div className="pointer-events-none absolute -bottom-20 right-40 h-48 w-48 rounded-full bg-tinta/[0.03]" />
+          <div className="relative grid items-center gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
             <div>
-              <h2 className="text-[24px] font-semibold leading-[1.15] tracking-tight md:text-5xl">
+              <h2 className="max-w-[520px] text-[24px] font-semibold leading-[1.1] tracking-tight md:text-[46px]">
                 Comienza tu prueba gratuita <span className="text-rosa">hoy</span>
               </h2>
-              <p className="mt-3 text-[13px] leading-relaxed text-tinta-70 md:mt-4 md:text-[18px]">Crea tu primera carta digital sin compromiso.</p>
-              <Link href="/registro" className="btn-primary mt-7 flex items-center justify-center gap-2 rounded-2xl py-3.5 font-semibold text-white md:max-w-sm">
-                Crear mi carta gratis <ArrowRight className="h-4 w-4" />
+              <p className="mt-3 text-[13px] leading-relaxed text-tinta-70 md:text-[17px]">Crea tu primera carta digital sin compromiso.</p>
+              <Link href="/registro" className="btn-primary mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-semibold text-white md:mt-8 md:text-[15px]">
+                Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
-              <p className="mt-3 text-[15px] text-tinta-70">No necesitas tarjeta de crédito.</p>
+              <p className="mt-3 text-[11.5px] text-tinta-70 md:mt-4 md:text-[13px]">No se requiere tarjeta de crédito.</p>
             </div>
-            <div className="space-y-3 rounded-[28px] bg-white/80 p-5 shadow-lg backdrop-blur">
+            <div className="space-y-1 rounded-[24px] bg-white/85 p-4 shadow-[0_20px_50px_-25px_rgba(27,17,48,0.35)] backdrop-blur md:p-5">
               {["Lista en 5 minutos", "Sin tarjeta", "Soporte por WhatsApp"].map((t, i) => (
-                <p key={t} className={`rounded-2xl px-5 py-4 text-[16px] font-medium ${i === 1 ? "bg-sol/15" : "bg-crema"}`}>
+                <p key={t} className={`rounded-2xl px-5 py-3.5 text-[13px] font-semibold md:py-4 md:text-[15px] ${i === 1 ? "bg-gradient-to-r from-transparent via-sol/20 to-sol/10" : ""}`}>
                   {t}
                 </p>
               ))}
@@ -388,31 +389,33 @@ export default function Home() {
       </section>
 
       {/* ───── Partners ───── */}
-      <section id="partners" className="scroll-mt-32 px-5 pb-28">
-        <Reveal className="mx-auto max-w-3xl rounded-[36px] bg-gradient-to-b from-white to-rosa-50/60 p-8 text-center shadow-[0_30px_80px_-40px_rgba(225,29,46,0.35)] ring-1 ring-rosa-100 md:p-14">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/antojo-logo.svg" alt="Antojo" className="mx-auto h-12 w-auto" />
-          <p className="mt-2 text-[13px] font-semibold uppercase tracking-[0.4em] text-tinta">Partners</p>
-          <h2 className="mt-6 text-[24px] font-semibold leading-tight tracking-tight md:text-5xl">
-            Conecta restaurantes.
-            <br />
-            <span className="text-rosa">Genera ingresos todos los meses.</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-[17px] leading-relaxed text-tinta-70">
-            Si trabajas con negocios de comida, suma Antojo a tu propuesta y crezcamos juntos.
-          </p>
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-tinta-70">
-            Tú nos presentas al negocio; nosotros nos encargamos de la demo, el cierre y la puesta en marcha. Tú recibes tu comisión cada mes.
-          </p>
-          <a
-            href={waLink("Hola, quiero ser partner de Antojo")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary mt-8 inline-flex items-center gap-2 rounded-2xl px-8 py-3.5 font-semibold text-white"
-          >
-            <Handshake className="h-5 w-5" /> Quiero ser partner <ArrowRight className="h-4 w-4" />
-          </a>
-          <p className="mt-3 text-[13px] text-tinta-70">Hablamos por WhatsApp y te contamos cómo empezar.</p>
+      <section id="partners" className="scroll-mt-32 px-4 pb-28 md:px-5">
+        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[28px] bg-gradient-to-br from-[#fffaf8] via-white to-rosa-50 px-6 py-12 text-center ring-1 ring-rosa-100 md:px-14 md:py-16">
+          <span aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-rosa/[0.04]" />
+          <div className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/antojo-logo.svg" alt="Antojo" className="mx-auto h-12 w-auto md:h-[60px]" />
+            <p className="mt-1 text-[12px] font-bold uppercase tracking-[0.4em] text-tinta md:text-[15px]">Partners</p>
+            <h2 className="mx-auto mt-6 max-w-[680px] text-[26px] font-semibold leading-[1.15] tracking-tight md:mt-8 md:text-[44px]">
+              Conecta restaurantes. <span className="text-rosa">Genera ingresos todos los meses.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-[600px] text-[14px] leading-relaxed text-tinta-70 md:mt-5 md:text-[17px]">
+              Si trabajas con negocios gastronómicos, suma Antojo a tu propuesta y crezcamos juntos.
+            </p>
+            <p className="mx-auto mt-4 max-w-[480px] text-[13px] leading-relaxed text-tinta-70 md:text-[15px]">
+              Tú nos conectas. Nuestro equipo se encarga de la demo, el cierre y la implementación. Tú recibes tu comisión cada mes.
+            </p>
+            <a
+              href={waLink("¡Hola! Estoy interesado/a en ser partner de Antojo. Quisiera conocer cómo empezar.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-rosa px-7 py-3.5 text-[15px] font-semibold text-white shadow-[0_12px_28px_-10px_rgba(225,29,46,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-rosa-600 hover:shadow-[0_16px_32px_-10px_rgba(225,29,46,0.7)] md:text-[16px]"
+            >
+              <WhatsAppIcon className="h-5 w-5" /> Quiero ser partner{" "}
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <p className="mt-4 text-[12px] text-tinta-70 md:text-[13px]">Hablemos por WhatsApp y te contamos cómo empezar.</p>
+          </div>
         </Reveal>
       </section>
 
