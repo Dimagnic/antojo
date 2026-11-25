@@ -107,7 +107,7 @@ export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
 
       <p className="mt-5 text-center text-sm text-tinta-70">
         {isLogin ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}
-        <Link href={isLogin ? "/registro" : "/entrar"} className="font-semibold text-rosa">
+        <Link href={isLogin ? "/onboarding" : "/entrar"} className="font-semibold text-rosa">
           {isLogin ? "Regístrate" : "Entra aquí"}
         </Link>
       </p>

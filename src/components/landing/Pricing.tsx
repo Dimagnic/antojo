@@ -72,7 +72,7 @@ export function Pricing() {
             </p>
           </div>
           <div className="flex flex-1 flex-col px-6 py-6">
-            <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-xl py-3 text-[15px] font-semibold text-white">
+            <Link href="/onboarding" className="btn-primary flex items-center justify-center gap-2 rounded-xl py-3 text-[15px] font-semibold text-white">
               Empezar gratis <ArrowRight className="h-4 w-4" />
             </Link>
             <p className="mt-2 text-center text-[12px] text-tinta-70">Cancela cuando quieras</p>
@@ -117,7 +117,7 @@ export function Pricing() {
           </div>
           <div className="flex flex-1 flex-col px-6 py-6">
             <Link
-              href="/registro"
+              href="/onboarding"
               className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sol to-[#ff8a00] py-3 text-[15px] font-bold text-tinta shadow-lg shadow-sol/30 transition hover:brightness-105"
             >
               Empezar gratis <ArrowRight className="h-4 w-4" />

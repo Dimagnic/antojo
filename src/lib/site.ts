@@ -8,7 +8,7 @@ export const SITE = {
 };
 
 export const waLink = (text: string) =>
-  SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}` : "/registro";
+  SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}` : "/onboarding";
 
 /** Foto de Unsplash (licencia gratuita) en la resolución pedida. */
 export const photo = (id: string, w = 1080, h?: number) =>

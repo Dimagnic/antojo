@@ -164,3 +164,6 @@ body {
 .tint-green { --tb: #cfeccf; --tbg: linear-gradient(160deg, #fbfefa, #f1faef); --pb: #dcf3d9; --pc: #2f7d32; }
 .tint-purple { --tb: #e1d6fb; --tbg: linear-gradient(160deg, #fcfaff, #f4efff); --pb: #ebe3ff; --pc: #6a3fd1; }
 .pill { background: var(--pb); color: var(--pc); }
+
+@keyframes scan { 0%, 100% { top: 14%; } 50% { top: 84%; } }
+.scan-line { animation: scan 2.4s ease-in-out infinite; }

@@ -741,7 +741,7 @@ function CartSheet({
 
   function send() {
     if (demo) {
-      router.push("/registro");
+      router.push("/onboarding");
       return;
     }
     const lines = [

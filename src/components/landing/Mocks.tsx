@@ -226,16 +226,13 @@ export function PriceMock() {
 
 /* 5 · Carta en inglés */
 export function LanguageMock() {
+  // Cambia solo al hacer clic, como en LaCarta
   const [en, setEn] = useState(false);
-  useEffect(() => {
-    const t = setInterval(() => setEn((v) => !v), 2800);
-    return () => clearInterval(t);
-  }, []);
   return (
     <div className="mt-8 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
       <div className="inline-flex rounded-full bg-crema p-1 text-[13px] font-semibold">
-        <span className={`rounded-full px-3.5 py-1.5 transition ${!en ? "bg-white shadow" : "text-tinta-70"}`}><FlagMX className="mr-1.5 inline h-3 w-4 align-[-1px]" />Español</span>
-        <span className={`rounded-full px-3.5 py-1.5 transition ${en ? "bg-white shadow" : "text-tinta-70"}`}><FlagUS className="mr-1.5 inline h-3 w-4 align-[-1px]" />English</span>
+        <button type="button" aria-pressed={!en} onClick={() => setEn(false)} className={`rounded-full px-3.5 py-1.5 transition ${!en ? "bg-white shadow" : "text-tinta-70 hover:text-tinta"}`}><FlagMX className="mr-1.5 inline h-3 w-4 align-[-1px]" />Español</button>
+        <button type="button" aria-pressed={en} onClick={() => setEn(true)} className={`rounded-full px-3.5 py-1.5 transition ${en ? "bg-white shadow" : "text-tinta-70 hover:text-tinta"}`}><FlagUS className="mr-1.5 inline h-3 w-4 align-[-1px]" />English</button>
       </div>
       <div className="mt-4 flex gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}

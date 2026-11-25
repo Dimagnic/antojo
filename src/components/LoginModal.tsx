@@ -2,26 +2,39 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Lock, X } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Lock, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 type Mode = "entrar" | "registro";
 const LAST_KEY = "antojo:ultimo-acceso";
 
-/** Ventana de inicio de sesión sobre la página, como la de LaCarta. */
-export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: boolean; onClose: () => void; initialMode?: Mode }) {
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  initialMode?: Mode;
+  /** A dónde vuelve Google al terminar */
+  googleNext?: string;
+  /** Si se da, se llama al tener sesión en lugar de ir al panel */
+  onAuthed?: () => void;
+  /** Convertir la cuenta temporal (anónima) en una cuenta real, sin perder la carta */
+  upgrade?: boolean;
+  closable?: boolean;
+};
+
+/** Ventana de inicio de sesión / registro sobre la página, como la de LaCarta. */
+export function LoginModal({ open, onClose, initialMode = "entrar", googleNext, onAuthed, upgrade = false, closable = true }: Props) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>(initialMode);
   const [step, setStep] = useState<"email" | "password">("email");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [last, setLast] = useState<string | null>(null);
   const passRef = useRef<HTMLInputElement>(null);
 
-  // Reinicia la ventana cada vez que se abre
   useEffect(() => {
     if (!open) return;
     /* eslint-disable react-hooks/set-state-in-effect -- reinicio al abrir la ventana */
@@ -34,14 +47,14 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
       setLast(localStorage.getItem(LAST_KEY));
     } catch {}
     /* eslint-enable react-hooks/set-state-in-effect */
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closable && onClose();
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [open, initialMode, onClose]);
+  }, [open, initialMode, onClose, closable]);
 
   useEffect(() => {
     if (step === "password") passRef.current?.focus();
@@ -56,51 +69,72 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
     } catch {}
   }
 
+  function done(fallback: string) {
+    if (onAuthed) return onAuthed();
+    onClose();
+    router.push(fallback);
+    router.refresh();
+  }
+
   async function google() {
     remember("google");
     const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback?next=${isLogin ? "/panel" : "/onboarding"}` },
-    });
+    const next = googleNext ?? (isLogin ? "/panel" : "/onboarding");
+    const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
+    if (upgrade && !isLogin) {
+      const { error } = await supabase.auth.linkIdentity({ provider: "google", options: { redirectTo } });
+      if (error) setError("No se pudo conectar con Google. Usa tu correo y una contraseña.");
+      return;
+    }
+    await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
   }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (step === "email") {
-      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return setError("Escribe un correo electrónico válido.");
-      return setStep("password");
-    }
+    setInfo(null);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return setError("Escribe un correo electrónico válido.");
+    if (isLogin && step === "email") return setStep("password");
+    if (password.length < 6) return setError("La contraseña debe tener al menos 6 caracteres.");
+
     setLoading(true);
     const supabase = createClient();
+
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setLoading(false);
       if (error) return setError("Correo o contraseña incorrectos.");
       remember("email");
-      onClose();
-      router.push("/panel");
-      router.refresh();
-    } else {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding` },
-      });
-      setLoading(false);
-      if (error) return setError(error.message);
-      remember("email");
-      if (data.session) {
-        onClose();
-        router.push("/onboarding");
-        router.refresh();
-      } else setInfo("Te enviamos un correo para confirmar tu cuenta. Ábrelo para continuar.");
+      return done("/panel");
     }
+
+    if (upgrade) {
+      // La cuenta temporal se queda con la carta y solo se le asigna correo y contraseña
+      const { data, error } = await supabase.auth.updateUser({ email, password });
+      setLoading(false);
+      if (error) return setError(error.message.includes("already") ? "Ese correo ya tiene una cuenta. Inicia sesión." : error.message);
+      remember("email");
+      if (data.user && !data.user.is_anonymous) return done("/panel");
+      return setInfo("Te enviamos un correo para confirmar tu cuenta. Ábrelo y tu carta quedará publicada.");
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(googleNext ?? "/onboarding")}` },
+    });
+    setLoading(false);
+    if (error) return setError(error.message.includes("registered") ? "Ese correo ya tiene una cuenta. Inicia sesión." : error.message);
+    remember("email");
+    if (data.session) return done("/onboarding");
+    setInfo("Te enviamos un correo para confirmar tu cuenta. Ábrelo para continuar.");
   }
 
+  const field =
+    "mt-2 w-full rounded-lg px-3.5 py-2.5 text-[13.5px] font-normal outline-none ring-1 ring-tinta/15 transition placeholder:text-tinta-70/70 focus:ring-2 focus:ring-rosa/40";
+
   return (
-    <div className="anim-fade fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/45 px-4 pt-[9vh]" onClick={onClose}>
+    <div className="anim-fade fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/55 px-4 pt-[7vh]" onClick={() => closable && onClose()}>
       <div
         role="dialog"
         aria-modal="true"
@@ -108,24 +142,26 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
         onClick={(e) => e.stopPropagation()}
         className="anim-pop relative w-full max-w-[400px] overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-12px_rgba(0,0,0,0.45)] ring-1 ring-black/5"
       >
-        <button onClick={onClose} aria-label="Cerrar" className="absolute right-3 top-3 rounded-md p-1.5 text-tinta-70 transition hover:bg-crema hover:text-tinta">
-          <X className="h-4 w-4" />
-        </button>
+        {closable && (
+          <button onClick={onClose} aria-label="Cerrar" className="absolute right-3 top-3 rounded-md p-1.5 text-tinta-70 ring-1 ring-tinta/10 transition hover:bg-crema hover:text-tinta">
+            <X className="h-4 w-4" />
+          </button>
+        )}
 
         <div className="px-8 pb-7 pt-8">
-          {step === "password" && (
+          {isLogin && step === "password" && (
             <button onClick={() => setStep("email")} aria-label="Volver" className="absolute left-3 top-3 rounded-md p-1.5 text-tinta-70 transition hover:bg-crema">
               <ArrowLeft className="h-4 w-4" />
             </button>
           )}
           <h2 id="login-title" className="text-center text-[17px] font-bold text-tinta">
-            {step === "password" ? (isLogin ? "Escribe tu contraseña" : "Crea tu contraseña") : isLogin ? "Entrar" : "Crea tu cuenta"}
+            {isLogin ? (step === "password" ? "Escribe tu contraseña" : "Entrar") : "Crea tu cuenta"}
           </h2>
           <p className="mt-1 text-center text-[13px] text-tinta-70">
-            {step === "password" ? email : isLogin ? "para continuar a Antojo" : "para crear tu carta en Antojo"}
+            {isLogin && step === "password" ? email : isLogin ? "para continuar a Antojo" : "para continuar en Antojo"}
           </p>
 
-          {step === "email" && (
+          {!(isLogin && step === "password") && (
             <>
               <div className="relative mt-7">
                 {last === "google" && (
@@ -151,32 +187,29 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
             </>
           )}
 
-          <form onSubmit={submit} className={step === "password" ? "mt-7" : ""}>
-            {step === "email" ? (
+          <form onSubmit={submit} className={isLogin && step === "password" ? "mt-7" : ""}>
+            {!(isLogin && step === "password") && (
               <label className="block text-[13px] font-medium text-tinta">
                 Correo electrónico
-                <input
-                  type="email"
-                  autoFocus
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Ingresa tu correo electrónico"
-                  className="mt-2 w-full rounded-lg px-3.5 py-2.5 text-[13.5px] font-normal outline-none ring-1 ring-tinta/15 transition placeholder:text-tinta-70/70 focus:ring-2 focus:ring-rosa/40"
-                />
+                <input type="email" autoFocus value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Ingresa tu correo electrónico" className={field} />
               </label>
-            ) : (
-              <label className="block text-[13px] font-medium text-tinta">
+            )}
+            {(!isLogin || step === "password") && (
+              <label className={`block text-[13px] font-medium text-tinta ${!isLogin ? "mt-4" : ""}`}>
                 Contraseña
-                <input
-                  ref={passRef}
-                  type="password"
-                  required
-                  minLength={6}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder={isLogin ? "Tu contraseña" : "Mínimo 6 caracteres"}
-                  className="mt-2 w-full rounded-lg px-3.5 py-2.5 text-[13.5px] font-normal outline-none ring-1 ring-tinta/15 transition focus:ring-2 focus:ring-rosa/40"
-                />
+                <span className="relative block">
+                  <input
+                    ref={passRef}
+                    type={show ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={isLogin ? "Ingresa tu contraseña" : "Crea una contraseña (mínimo 6)"}
+                    className={`${field} pr-10`}
+                  />
+                  <button type="button" onClick={() => setShow((v) => !v)} aria-label="Mostrar contraseña" className="absolute right-3 top-1/2 mt-1 -translate-y-1/2 text-tinta-70">
+                    {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </span>
               </label>
             )}
             {error && <p className="mt-2 text-[12.5px] text-red-600">{error}</p>}
@@ -191,7 +224,7 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
         </div>
 
         <div className="border-t border-tinta/10 bg-[#f7f7f8] py-4 text-center text-[13px] text-tinta-70">
-          {isLogin ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}
+          {isLogin ? "¿No tienes cuenta? " : "¿Ya tienes una cuenta? "}
           <button
             onClick={() => {
               setMode(isLogin ? "registro" : "entrar");
@@ -201,7 +234,7 @@ export function LoginModal({ open, onClose, initialMode = "entrar" }: { open: bo
             }}
             className="font-semibold text-tinta hover:text-rosa"
           >
-            {isLogin ? "Regístrate" : "Entra aquí"}
+            {isLogin ? "Regístrate" : "Iniciar sesión"}
           </button>
         </div>
         <div className="flex items-center justify-center gap-1.5 border-t border-tinta/10 bg-[#f7f7f8] py-3 text-[11.5px] text-tinta-70">

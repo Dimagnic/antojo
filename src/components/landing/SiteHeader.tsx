@@ -40,7 +40,7 @@ export function SiteHeader() {
         <div className="mx-auto flex max-w-[1210px] items-center justify-center gap-3 px-4 py-1.5 text-[11.5px] font-semibold text-white md:py-2 md:text-[13px]">
           <span>Prueba Pro 14 días gratis</span>
           <Link
-            href="/registro"
+            href="/onboarding"
             className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-bold text-rosa transition hover:scale-105"
           >
             Activar ahora <ArrowRight className="h-3.5 w-3.5" />
@@ -74,7 +74,7 @@ export function SiteHeader() {
               <button onClick={() => setLogin(true)} className="rounded-lg bg-white px-3.5 py-1.5 text-[15px] font-medium ring-1 ring-tinta/15 transition hover:bg-crema">
                 Iniciar sesión
               </button>
-              <Link href="/registro" className="rounded-lg bg-rosa px-3.5 py-1.5 text-[15px] font-semibold text-white transition hover:bg-rosa-600">
+              <Link href="/onboarding" className="rounded-lg bg-rosa px-3.5 py-1.5 text-[15px] font-semibold text-white transition hover:bg-rosa-600">
                 Probar gratis
               </Link>
             </div>
@@ -120,7 +120,7 @@ export function SiteHeader() {
             >
               Iniciar sesión
             </button>
-            <Link href="/registro" onClick={() => setOpen(false)} className="btn-primary block rounded-2xl py-3 text-center font-semibold text-white">
+            <Link href="/onboarding" onClick={() => setOpen(false)} className="btn-primary block rounded-2xl py-3 text-center font-semibold text-white">
               Probar gratis
             </Link>
           </div>

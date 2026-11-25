@@ -1,12 +1,6 @@
-import { Suspense } from "react";
-import { AuthForm } from "@/components/AuthForm";
+import { redirect } from "next/navigation";
 
-export const metadata = { title: "Crear cuenta" };
-
+// Crear cuenta empieza armando la carta, como en LaCarta.
 export default function Page() {
-  return (
-    <Suspense>
-      <AuthForm mode="registro" />
-    </Suspense>
-  );
+  redirect("/onboarding");
 }

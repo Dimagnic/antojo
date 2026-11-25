@@ -3,12 +3,15 @@ import { ExternalLink, LogOut } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { PanelTabs } from "@/components/PanelTabs";
 import { signOut } from "@/app/actions";
-import { requireRestaurant } from "@/lib/data";
+import { GuestGate } from "@/components/GuestGate";
+import { requireRestaurant, requireUser } from "@/lib/data";
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
+  const user = await requireUser();
   const r = await requireRestaurant();
   return (
     <div className="min-h-screen">
+      {user.is_anonymous && <GuestGate />}
       <header className="border-b border-rosa-100 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3">
           <div className="flex items-center gap-4">

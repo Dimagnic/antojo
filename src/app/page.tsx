@@ -174,7 +174,7 @@ export default function Home() {
               <br className="hidden lg:block" /> que vende más y consigue reseñas sin descargar nada.
             </p>
             <div className="anim-fade-up mt-5 flex flex-col gap-2 sm:flex-row sm:items-center md:mt-8 md:gap-3" style={{ animationDelay: "300ms" }}>
-              <Link href="/registro" className="btn-primary flex items-center justify-center gap-2 rounded-xl px-8 py-2.5 text-[13px] font-semibold text-white md:rounded-2xl md:py-3.5 md:text-[16px]">
+              <Link href="/onboarding" className="btn-primary flex items-center justify-center gap-2 rounded-xl px-8 py-2.5 text-[13px] font-semibold text-white md:rounded-2xl md:py-3.5 md:text-[16px]">
                 Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/demo" className="flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-2 text-[12px] font-semibold text-tinta md:rounded-2xl md:py-3.5 md:text-[16px] shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
@@ -372,7 +372,7 @@ export default function Home() {
                 Comienza tu prueba gratuita <span className="text-rosa">hoy</span>
               </h2>
               <p className="mt-3 text-[13px] leading-relaxed text-tinta-70 md:text-[17px]">Crea tu primera carta digital sin compromiso.</p>
-              <Link href="/registro" className="btn-primary mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-semibold text-white md:mt-8 md:text-[15px]">
+              <Link href="/onboarding" className="btn-primary mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-semibold text-white md:mt-8 md:text-[15px]">
                 Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
               <p className="mt-3 text-[11.5px] text-tinta-70 md:mt-4 md:text-[13px]">No se requiere tarjeta de crédito.</p>

@@ -18,7 +18,7 @@ const product = [
 ];
 
 const account = [
-  { href: "/registro", label: "Crear mi carta" },
+  { href: "/onboarding", label: "Crear mi carta" },
   { href: "/entrar", label: "Entrar a mi panel" },
 ];
 
