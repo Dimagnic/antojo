@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Eye, EyeOff, Lock, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { authError, startGoogle } from "@/lib/auth";
 
 type Mode = "entrar" | "registro";
 const LAST_KEY = "antojo:ultimo-acceso";
@@ -81,12 +82,9 @@ export function LoginModal({ open, onClose, initialMode = "entrar", googleNext, 
     const supabase = createClient();
     const next = googleNext ?? (isLogin ? "/panel" : "/onboarding");
     const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
-    if (upgrade && !isLogin) {
-      const { error } = await supabase.auth.linkIdentity({ provider: "google", options: { redirectTo } });
-      if (error) setError("No se pudo conectar con Google. Usa tu correo y una contraseña.");
-      return;
-    }
-    await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo } });
+    setError(null);
+    const err = await startGoogle(supabase, redirectTo, upgrade && !isLogin);
+    if (err) setError(err);
   }
 
   async function submit(e: React.FormEvent) {
@@ -103,7 +101,7 @@ export function LoginModal({ open, onClose, initialMode = "entrar", googleNext, 
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setLoading(false);
-      if (error) return setError("Correo o contraseña incorrectos.");
+      if (error) return setError(authError(error.message));
       remember("email");
       return done("/panel");
     }
@@ -112,7 +110,7 @@ export function LoginModal({ open, onClose, initialMode = "entrar", googleNext, 
       // La cuenta temporal se queda con la carta y solo se le asigna correo y contraseña
       const { data, error } = await supabase.auth.updateUser({ email, password });
       setLoading(false);
-      if (error) return setError(error.message.includes("already") ? "Ese correo ya tiene una cuenta. Inicia sesión." : error.message);
+      if (error) return setError(authError(error.message));
       remember("email");
       if (data.user && !data.user.is_anonymous) return done("/panel");
       return setInfo("Te enviamos un correo para confirmar tu cuenta. Ábrelo y tu carta quedará publicada.");
@@ -124,7 +122,9 @@ export function LoginModal({ open, onClose, initialMode = "entrar", googleNext, 
       options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(googleNext ?? "/onboarding")}` },
     });
     setLoading(false);
-    if (error) return setError(error.message.includes("registered") ? "Ese correo ya tiene una cuenta. Inicia sesión." : error.message);
+    if (error) return setError(authError(error.message));
+    // Con "Confirm email" activo, Supabase devuelve un usuario sin identidades si el correo ya existe
+    if (data.user && data.user.identities?.length === 0) return setError("Ese correo ya tiene una cuenta. Inicia sesión.");
     remember("email");
     if (data.session) return done("/onboarding");
     setInfo("Te enviamos un correo para confirmar tu cuenta. Ábrelo para continuar.");

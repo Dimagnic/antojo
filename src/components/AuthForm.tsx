@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { authError, startGoogle } from "@/lib/auth";
 
 export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
   const router = useRouter();
@@ -12,7 +13,11 @@ export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(() => {
+    const e = params.get("error");
+    if (!e) return null;
+    return e === "google" ? "El acceso con Google todavía no está activado. Usa tu correo y una contraseña." : "No pudimos iniciar tu sesión. Inténtalo de nuevo.";
+  });
   const [info, setInfo] = useState<string | null>(null);
   const isLogin = mode === "entrar";
 
@@ -24,7 +29,7 @@ export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
     const supabase = createClient();
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setError("Correo o contraseña incorrectos.");
+      if (error) setError(authError(error.message));
       else {
         router.push(next);
         router.refresh();
@@ -35,7 +40,8 @@ export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
         password,
         options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding` },
       });
-      if (error) setError(error.message);
+      if (error) setError(authError(error.message));
+      else if (data.user && data.user.identities?.length === 0) setError("Ese correo ya tiene una cuenta. Inicia sesión.");
       else if (data.session) {
         router.push("/onboarding");
         router.refresh();
@@ -46,10 +52,9 @@ export function AuthForm({ mode }: { mode: "entrar" | "registro" }) {
 
   async function withGoogle() {
     const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(isLogin ? next : "/onboarding")}` },
-    });
+    setError(null);
+    const err = await startGoogle(supabase, `${window.location.origin}/auth/callback?next=${encodeURIComponent(isLogin ? next : "/onboarding")}`);
+    if (err) setError(err);
   }
 
   return (
