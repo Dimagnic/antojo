@@ -679,7 +679,7 @@ function Modal({ onClose, children, compact }: { onClose: () => void; children: 
     <div className="anim-fade absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={onClose}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`anim-pop relative w-full rounded-3xl bg-[#140c22]/90 p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl ${compact ? "max-w-xs" : "max-w-sm"}`}
+        className={`anim-pop relative w-full rounded-3xl bg-[#141414]/90 p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl ${compact ? "max-w-xs" : "max-w-sm"}`}
       >
         <button onClick={onClose} className="absolute right-3 top-3 rounded-full bg-white/10 p-2 hover:bg-white/20" aria-label="Cerrar">
           <X className="h-4 w-4" />

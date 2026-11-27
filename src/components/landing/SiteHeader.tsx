@@ -53,8 +53,8 @@ export function SiteHeader() {
         <div
           className={`mx-auto max-w-[1210px] rounded-[28px] transition-all duration-500 ${
             scrolled || open
-              ? "bg-white/65 shadow-[0_8px_32px_-12px_rgba(27,17,48,0.25)] ring-1 ring-white/60 backdrop-blur-xl backdrop-saturate-150"
-              : "bg-white shadow-[0_10px_40px_-16px_rgba(27,17,48,0.2)]"
+              ? "bg-white/65 shadow-[0_8px_32px_-12px_rgba(10,10,10,0.25)] ring-1 ring-white/60 backdrop-blur-xl backdrop-saturate-150"
+              : "bg-white shadow-[0_10px_40px_-16px_rgba(10,10,10,0.2)]"
           }`}
         >
           <div className="flex items-center justify-between px-4 py-2.5 md:px-5 md:py-3.5">
@@ -92,7 +92,7 @@ export function SiteHeader() {
 
         {/* Menú hamburguesa */}
         <div
-          className={`mx-auto mt-2 max-w-[1210px] origin-top overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 transition-all duration-300 lg:hidden ${
+          className={`mx-auto mt-2 max-w-[1210px] origin-top overflow-hidden rounded-3xl bg-white shadow-[0_20px_50px_-20px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5 transition-all duration-300 lg:hidden ${
             open ? "max-h-[480px] scale-100 opacity-100" : "pointer-events-none max-h-0 scale-95 opacity-0"
           }`}
         >

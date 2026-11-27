@@ -9,11 +9,11 @@ export function QrCard({ url, name }: { url: string; name: string }) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    QRCode.toDataURL(url, { width: 1200, margin: 2, color: { dark: "#1b1130", light: "#ffffff" }, errorCorrectionLevel: "M" }).then(setPng);
+    QRCode.toDataURL(url, { width: 1200, margin: 2, color: { dark: "#0a0a0a", light: "#ffffff" }, errorCorrectionLevel: "M" }).then(setPng);
   }, [url]);
 
   async function downloadSvg() {
-    const svg = await QRCode.toString(url, { type: "svg", margin: 2, color: { dark: "#1b1130", light: "#ffffff" } });
+    const svg = await QRCode.toString(url, { type: "svg", margin: 2, color: { dark: "#0a0a0a", light: "#ffffff" } });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
     a.download = `qr-${name}.svg`;

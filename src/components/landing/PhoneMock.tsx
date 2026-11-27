@@ -28,7 +28,7 @@ export function PhoneMock({
 
   const big = size === "lg";
   return (
-    <div className={`relative rounded-[2.6rem] bg-[#0c0814] p-[9px] shadow-[0_40px_80px_-30px_rgba(27,17,48,0.55)] ring-1 ring-black/40 ${big ? "w-[270px] sm:w-[290px]" : "w-[190px]"}`}>
+    <div className={`relative rounded-[2.6rem] bg-[#0a0a0a] p-[9px] shadow-[0_40px_80px_-30px_rgba(10,10,10,0.55)] ring-1 ring-black/40 ${big ? "w-[270px] sm:w-[290px]" : "w-[190px]"}`}>
       <div className={`relative overflow-hidden rounded-[2.1rem] bg-black ${big ? "aspect-[9/19.5]" : "aspect-[9/18]"}`}>
         {/* Isla dinámica y barra de estado */}
         {big && (

@@ -177,7 +177,7 @@ export default function Home() {
               <Link href="/onboarding" className="btn-primary flex items-center justify-center gap-2 rounded-xl px-8 py-2.5 text-[13px] font-semibold text-white md:rounded-2xl md:py-3.5 md:text-[16px]">
                 Crear menú gratis <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-2 text-[12px] font-semibold text-tinta md:rounded-2xl md:py-3.5 md:text-[16px] shadow-[0_8px_24px_-12px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
+              <Link href="/demo" className="flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-2 text-[12px] font-semibold text-tinta md:rounded-2xl md:py-3.5 md:text-[16px] shadow-[0_8px_24px_-12px_rgba(10,10,10,0.25)] ring-1 ring-tinta/10 sm:shadow-none sm:ring-0">
                 Ver en acción <span className="h-2 w-2 animate-pulse rounded-full bg-rosa" />
               </Link>
             </div>
@@ -206,7 +206,7 @@ export default function Home() {
               ].map((r, i) => (
                 <div
                   key={r.w}
-                  className={`float-y absolute w-[236px] rounded-xl bg-white p-3 shadow-[0_10px_30px_-12px_rgba(27,17,48,0.3)] ring-1 ring-tinta/5 ${r.pos}`}
+                  className={`float-y absolute w-[236px] rounded-xl bg-white p-3 shadow-[0_10px_30px_-12px_rgba(10,10,10,0.3)] ring-1 ring-tinta/5 ${r.pos}`}
                   style={{ animationDelay: `${i * 0.8}s` }}
                 >
                   <div className="flex gap-2.5">
@@ -224,7 +224,7 @@ export default function Home() {
               <p className="absolute bottom-0 left-10 text-[10px] text-tinta-70/70">Reseñas de ejemplo</p>
             </div>
             <div className="relative">
-              <div className="absolute -right-12 -top-6 rotate-[8deg] rounded-2xl md:-right-10 md:-top-10 bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 sm:-right-24">
+              <div className="absolute -right-12 -top-6 rotate-[8deg] rounded-2xl md:-right-10 md:-top-10 bg-white p-2.5 shadow-[0_20px_40px_-15px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5 sm:-right-24">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/brand/qr-demo.svg" alt="Código QR de la demo" className="h-20 w-20 sm:h-[120px] sm:w-[120px]" />
               </div>
@@ -278,7 +278,7 @@ export default function Home() {
               key={f.pill}
               delay={(i % 3) * 110}
               className={`relative overflow-hidden rounded-[20px] p-5 md:rounded-[24px] md:p-8 ${SPANS[i]} ${
-                f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : `tint-${f.tint ?? "rosa"} shadow-[0_20px_50px_-35px_rgba(27,17,48,0.35)]`
+                f.dark ? "card-dark text-white shadow-2xl shadow-tinta/25" : `tint-${f.tint ?? "rosa"} shadow-[0_20px_50px_-35px_rgba(10,10,10,0.35)]`
               }`}
             >
               <div className={f.aside ? "grid items-start gap-6 lg:grid-cols-[1fr_auto]" : ""}>
@@ -363,7 +363,7 @@ export default function Home() {
 
       {/* ───── Llamado final ───── */}
       <section className="px-5 pb-28">
-        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-[#fbf8f5] to-[#f6f1ec] px-6 py-10 shadow-[0_30px_80px_-40px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5 md:px-12 md:py-14">
+        <Reveal className="relative mx-auto max-w-[1210px] overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-[#fbf8f5] to-[#f6f1ec] px-6 py-10 shadow-[0_30px_80px_-40px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5 md:px-12 md:py-14">
           <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-tinta/[0.03]" />
           <div className="pointer-events-none absolute -bottom-20 right-40 h-48 w-48 rounded-full bg-tinta/[0.03]" />
           <div className="relative grid items-center gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
@@ -377,7 +377,7 @@ export default function Home() {
               </Link>
               <p className="mt-3 text-[11.5px] text-tinta-70 md:mt-4 md:text-[13px]">No se requiere tarjeta de crédito.</p>
             </div>
-            <div className="space-y-1 rounded-[24px] bg-white/85 p-4 shadow-[0_20px_50px_-25px_rgba(27,17,48,0.35)] backdrop-blur md:p-5">
+            <div className="space-y-1 rounded-[24px] bg-white/85 p-4 shadow-[0_20px_50px_-25px_rgba(10,10,10,0.35)] backdrop-blur md:p-5">
               {["Lista en 5 minutos", "Sin tarjeta", "Soporte por WhatsApp"].map((t, i) => (
                 <p key={t} className={`rounded-2xl px-5 py-3.5 text-[13px] font-semibold md:py-4 md:text-[15px] ${i === 1 ? "bg-gradient-to-r from-transparent via-sol/20 to-sol/10" : ""}`}>
                   {t}

@@ -128,8 +128,8 @@ export function ReviewMock() {
           <span className="rounded-full bg-black/55 px-2 py-0.5 text-[8px] font-medium text-white">Principales</span>
           <Menu />
         </div>
-        <div className="anim-pop absolute left-1/2 top-[42%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#141019]/95 px-3 pb-3 pt-5 text-center text-white ring-1 ring-white/10">
-          <span className="absolute left-1/2 top-0 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#2a2433] ring-2 ring-[#141019]">
+        <div className="anim-pop absolute left-1/2 top-[42%] w-[74%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#141414]/95 px-3 pb-3 pt-5 text-center text-white ring-1 ring-white/10">
+          <span className="absolute left-1/2 top-0 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#2a2433] ring-2 ring-[#141414]">
             <Star className="h-3 w-3 fill-sol text-sol" />
           </span>
           <span className="absolute right-2 top-1.5 text-[8px] text-white/50">✕</span>
@@ -204,7 +204,7 @@ export function PriceMock() {
     return () => (clearTimeout(a), clearTimeout(b));
   }, [inView]);
   return (
-    <div ref={ref} className="mt-8 overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+    <div ref={ref} className="mt-8 overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_-20px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5">
       <div className="p-5">
         <div className="flex items-center justify-between text-[13px]">
           <span className="text-tinta-70">Precio actualizado</span>
@@ -229,7 +229,7 @@ export function LanguageMock() {
   // Cambia solo al hacer clic, como en LaCarta
   const [en, setEn] = useState(false);
   return (
-    <div className="mt-8 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+    <div className="mt-8 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5">
       <div className="inline-flex rounded-full bg-crema p-1 text-[13px] font-semibold">
         <button type="button" aria-pressed={!en} onClick={() => setEn(false)} className={`rounded-full px-3.5 py-1.5 transition ${!en ? "bg-white shadow" : "text-tinta-70 hover:text-tinta"}`}><FlagMX className="mr-1.5 inline h-3 w-4 align-[-1px]" />Español</button>
         <button type="button" aria-pressed={en} onClick={() => setEn(true)} className={`rounded-full px-3.5 py-1.5 transition ${en ? "bg-white shadow" : "text-tinta-70 hover:text-tinta"}`}><FlagUS className="mr-1.5 inline h-3 w-4 align-[-1px]" />English</button>
@@ -287,7 +287,7 @@ export function WheelMock() {
     <div className="mt-8">
       <div className="relative mx-auto aspect-square w-full max-w-[300px]">
         <span className="absolute left-1/2 top-[-6px] z-10 -translate-x-1/2 text-3xl drop-shadow">▼</span>
-        <div className="spin-slow h-full w-full rounded-full p-2 ring-8 ring-white/5" style={{ background: "conic-gradient(#e11d2e 0 45deg,#2a1d3d 45deg 90deg,#ff5a4f 90deg 135deg,#2a1d3d 135deg 180deg,#b9101f 180deg 225deg,#2a1d3d 225deg 270deg,#ffb800 270deg 315deg,#2a1d3d 315deg 360deg)" }}>
+        <div className="spin-slow h-full w-full rounded-full p-2 ring-8 ring-white/5" style={{ background: "conic-gradient(#e11d2e 0 45deg,#262626 45deg 90deg,#ff5a4f 90deg 135deg,#262626 135deg 180deg,#b9101f 180deg 225deg,#262626 225deg 270deg,#ffb800 270deg 315deg,#262626 315deg 360deg)" }}>
           {icons.map((ic, n) => (
             <span
               key={n}
@@ -298,7 +298,7 @@ export function WheelMock() {
             </span>
           ))}
         </div>
-        <div className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[#150d24] ring-4 ring-rosa">
+        <div className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[#0f0f0f] ring-4 ring-rosa">
           <Gift className="h-6 w-6 text-sol" />
           <span className="mt-0.5 text-[8px] font-bold uppercase tracking-wider">Tu premio</span>
         </div>
@@ -320,7 +320,7 @@ export function WheelMock() {
 /* 8 · Promociones por correo: el correo (izquierda) y el celular con la notificación (derecha) */
 export function MailEmail() {
   return (
-    <div className="mt-7 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+    <div className="mt-7 rounded-2xl bg-white p-4 shadow-[0_12px_40px_-20px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5">
       <p className="text-[14px] font-medium">Te guardamos una mesa y 20% de descuento</p>
       <div className="mt-2 flex items-center gap-2 text-[11px] text-tinta-70">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-crema font-serif text-[13px] text-tinta">T</span>
@@ -352,7 +352,7 @@ export function MailEmail() {
 
 export function MailPhone() {
   return (
-    <div className="mx-auto w-[210px] shrink-0 rounded-[2.6rem] bg-[#1d1b20] p-[7px] shadow-[0_30px_60px_-25px_rgba(27,17,48,0.6)] ring-1 ring-black/50 lg:w-[220px]">
+    <div className="mx-auto w-[210px] shrink-0 rounded-[2.6rem] bg-[#1d1b20] p-[7px] shadow-[0_30px_60px_-25px_rgba(10,10,10,0.6)] ring-1 ring-black/50 lg:w-[220px]">
       <div className="relative aspect-[9/19] overflow-hidden rounded-[2.15rem]">
         {/* Fondo de pantalla con ondas */}
         <svg viewBox="0 0 200 420" className="absolute inset-0 h-full w-full" preserveAspectRatio="none" aria-hidden>
@@ -397,7 +397,7 @@ function CartInner() {
     ["1×", "Agua de horchata", "$35"],
   ];
   return (
-    <div className="mt-8 rounded-2xl bg-white p-5 shadow-[0_12px_40px_-20px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+    <div className="mt-8 rounded-2xl bg-white p-5 shadow-[0_12px_40px_-20px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5">
       {rows.map(([q, n, p]) => (
         <div key={n} className="flex items-center justify-between border-b border-tinta/5 py-3 text-[14px]">
           <span>

@@ -33,7 +33,7 @@ export function Footer() {
         style={{
           backgroundColor: "#e11d2e",
           backgroundImage:
-            "radial-gradient(circle at 12px 0, #1b1130 7px, transparent 7.5px), radial-gradient(circle at 12px 24px, #ffb800 3px, transparent 3.5px)",
+            "radial-gradient(circle at 12px 0, #0a0a0a 7px, transparent 7.5px), radial-gradient(circle at 12px 24px, #ffb800 3px, transparent 3.5px)",
           backgroundSize: "24px 24px",
         }}
       />

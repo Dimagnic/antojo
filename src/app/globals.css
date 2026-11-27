@@ -6,8 +6,8 @@
   --color-rosa-100: #ffdad8;
   --color-rosa-600: #b9101f;
   --color-sol: #ffb800;
-  --color-tinta: #1b1130;
-  --color-tinta-70: #4a4160;
+  --color-tinta: #0a0a0a;
+  --color-tinta-70: #646464;
   --color-crema: #fff8f6;
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
@@ -105,13 +105,13 @@ body {
   background:
     radial-gradient(120% 80% at 100% 100%, rgb(225 29 46 / 0.35), transparent 55%),
     radial-gradient(80% 60% at 0% 0%, rgb(255 184 0 / 0.08), transparent 60%),
-    #150d24;
+    #0f0f0f;
 }
 .card-light {
   background: linear-gradient(160deg, #ffffff 0%, #fff7f6 100%);
 }
 .grid-dots {
-  background-image: radial-gradient(rgb(27 17 48 / 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(10 10 10 / 0.06) 1px, transparent 1px);
   background-size: 14px 14px;
 }
 

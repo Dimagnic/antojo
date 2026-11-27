@@ -157,7 +157,7 @@ export function OnboardingWizard() {
         href={waLink("Hola, ¿me ayudan a terminar mi carta de Antojo?")}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-[12px] font-medium text-tinta shadow-[0_6px_20px_-6px_rgba(27,17,48,0.35)] ring-1 ring-tinta/10 transition hover:-translate-y-0.5"
+        className="fixed bottom-4 right-4 z-40 flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-[12px] font-medium text-tinta shadow-[0_6px_20px_-6px_rgba(10,10,10,0.35)] ring-1 ring-tinta/10 transition hover:-translate-y-0.5"
       >
         Ayúdame a terminar este menú
         <span className="relative text-[#25D366]">
@@ -206,7 +206,7 @@ function Stepper({ step }: { step: number }) {
   );
 }
 
-const card = "rounded-2xl bg-white p-5 shadow-[0_10px_40px_-16px_rgba(27,17,48,0.25)] ring-1 ring-tinta/10 md:p-6";
+const card = "rounded-2xl bg-white p-5 shadow-[0_10px_40px_-16px_rgba(10,10,10,0.25)] ring-1 ring-tinta/10 md:p-6";
 const input =
   "w-full rounded-lg bg-white px-3 py-2 text-[13px] outline-none ring-1 ring-tinta/15 transition placeholder:text-tinta-70/60 focus:ring-2 focus:ring-rosa/50 [&:not(:placeholder-shown)]:bg-[#eef3fd]";
 const label = "flex items-center gap-1.5 text-[13px] font-medium text-tinta";
@@ -705,7 +705,7 @@ function ReadyStep({
       </h1>
       <p className="mt-1.5 text-[13px] text-tinta-70 md:text-[14px]">Después de publicar, puedes seguir cargando y editando tu carta.</p>
 
-      <div className="mx-auto mt-5 w-[200px] rounded-[2rem] bg-[#18151d] p-[6px] shadow-[0_30px_60px_-25px_rgba(27,17,48,0.6)]">
+      <div className="mx-auto mt-5 w-[200px] rounded-[2rem] bg-[#18151d] p-[6px] shadow-[0_30px_60px_-25px_rgba(10,10,10,0.6)]">
         <div className="aspect-[9/17.5] overflow-hidden rounded-[1.65rem]">{p && <Slide key={p.id} p={p} compact />}</div>
       </div>
 
@@ -728,7 +728,7 @@ function ReadyStep({
 function Creating({ status }: { status: string }) {
   const cells = [0, 1, 1, 0, 1, 2, 1, 2, 2, 1, 0, 1, 1, 0, 1, 2, 1, 2, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 1, 0, 0, 1, 1, 0, 1, 2];
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#fff4f1] to-white px-6 text-center" style={{ backgroundImage: "radial-gradient(rgb(27 17 48 / 0.05) 1px, transparent 1px)", backgroundSize: "16px 16px" }}>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#fff4f1] to-white px-6 text-center" style={{ backgroundImage: "radial-gradient(rgb(10 10 10 / 0.05) 1px, transparent 1px)", backgroundSize: "16px 16px" }}>
       <div className="relative h-[150px] w-[150px] p-3">
         {["left-0 top-0 border-l-[3px] border-t-[3px] rounded-tl-xl", "right-0 top-0 border-r-[3px] border-t-[3px] rounded-tr-xl", "bottom-0 left-0 border-b-[3px] border-l-[3px] rounded-bl-xl", "bottom-0 right-0 border-b-[3px] border-r-[3px] rounded-br-xl"].map((c) => (
           <span key={c} className={`absolute h-6 w-6 border-rosa ${c}`} />
@@ -746,7 +746,7 @@ function Creating({ status }: { status: string }) {
       </div>
       <h1 className="mt-8 text-[22px] font-bold tracking-tight">Creando tu carta digital</h1>
       <p className="mt-1.5 max-w-[260px] text-[14px] leading-relaxed text-tinta-70">Transformando tu negocio en una experiencia única</p>
-      <p className="mt-6 flex items-center gap-2 rounded-full bg-white px-4 py-2 font-mono text-[12px] uppercase tracking-wider text-tinta shadow-[0_6px_20px_-8px_rgba(27,17,48,0.3)] ring-1 ring-tinta/5">
+      <p className="mt-6 flex items-center gap-2 rounded-full bg-white px-4 py-2 font-mono text-[12px] uppercase tracking-wider text-tinta shadow-[0_6px_20px_-8px_rgba(10,10,10,0.3)] ring-1 ring-tinta/5">
         <span className="h-2 w-2 animate-pulse rounded-full bg-rosa" /> {status}
       </p>
       <div className="mt-4 flex gap-1.5">

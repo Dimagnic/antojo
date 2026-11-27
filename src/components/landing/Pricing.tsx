@@ -57,7 +57,7 @@ export function Pricing() {
 
       <div className="mx-auto mt-8 grid max-w-[760px] md:mt-10 items-stretch gap-6 md:grid-cols-2">
         {/* Pro */}
-        <div className="order-2 flex flex-col overflow-hidden rounded-[28px] bg-white shadow md:order-1-[0_24px_60px_-30px_rgba(27,17,48,0.35)] ring-1 ring-rosa-100">
+        <div className="order-2 flex flex-col overflow-hidden rounded-[28px] bg-white shadow md:order-1-[0_24px_60px_-30px_rgba(10,10,10,0.35)] ring-1 ring-rosa-100">
           <div className="relative overflow-hidden bg-gradient-to-br from-rosa via-[#f2362f] to-[#ff6a3d] px-6 pb-5 pt-6 text-white">
             <span className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/15" />
             <h3 className="text-[22px] font-bold">Pro</h3>

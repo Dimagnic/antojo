@@ -6,7 +6,7 @@ import { PHOTOS, photo } from "@/lib/site";
 export function BlogCard({ post }: { post: Post }) {
   const [a, ...rest] = post.coverTitle.split(" ");
   return (
-    <Link href={`/blog/${post.slug}`} className="group block overflow-hidden rounded-[28px] bg-white shadow-[0_16px_50px_-24px_rgba(27,17,48,0.35)] ring-1 ring-tinta/5">
+    <Link href={`/blog/${post.slug}`} className="group block overflow-hidden rounded-[28px] bg-white shadow-[0_16px_50px_-24px_rgba(10,10,10,0.35)] ring-1 ring-tinta/5">
       <div className="relative aspect-[16/9] overflow-hidden bg-tinta">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

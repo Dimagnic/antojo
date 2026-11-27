@@ -44,7 +44,7 @@ export function HeroPhone() {
   const scene = SCENES[s].id;
 
   return (
-    <div className="relative w-[220px] rounded-[2.5rem] bg-[#0c0814] p-[8px] shadow-[0_40px_80px_-30px_rgba(27,17,48,0.55)] ring-1 ring-black/40 sm:w-[236px]">
+    <div className="relative w-[220px] rounded-[2.5rem] bg-[#0a0a0a] p-[8px] shadow-[0_40px_80px_-30px_rgba(10,10,10,0.55)] ring-1 ring-black/40 sm:w-[236px]">
       <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.15rem] bg-white">
         {/* Isla y barra de estado */}
         <div className="absolute left-1/2 top-2 z-40 h-[22px] w-[84px] -translate-x-1/2 rounded-full bg-black" />

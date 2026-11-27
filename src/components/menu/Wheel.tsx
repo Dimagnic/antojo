@@ -8,7 +8,7 @@ import type { Dict } from "./i18n";
 export const SEGMENTS = [100, 0, 20, 1000, 0, 20, 100, 0, 20, 1000, 0, 20];
 // Probabilidad de cada premio (se reparte entre sus casillas)
 const ODDS: Record<number, number> = { 0: 0.42, 20: 0.4, 100: 0.16, 1000: 0.02 };
-const COLORS = ["#e11d2e", "#2a1d3d", "#ff5a4f", "#b9101f", "#2a1d3d", "#ffb800"];
+const COLORS = ["#e11d2e", "#262626", "#ff5a4f", "#b9101f", "#262626", "#ffb800"];
 
 function pickIndex() {
   const r = Math.random();
@@ -77,7 +77,7 @@ export function Wheel({
             transition: spinning ? "transform 4.5s cubic-bezier(0.12, 0.8, 0.12, 1)" : "none",
           }}
         >
-          <circle cx="150" cy="150" r="149" fill="#1b1130" />
+          <circle cx="150" cy="150" r="149" fill="#0a0a0a" />
           {SEGMENTS.map((v, i) => {
             const [x1, y1] = polar(i * seg, R);
             const [x2, y2] = polar((i + 1) * seg, R);
@@ -86,7 +86,7 @@ export function Wheel({
             const [ix, iy] = polar(mid, R * 0.9);
             return (
               <g key={i}>
-                <path d={`M150 150 L${x1} ${y1} A${R} ${R} 0 0 1 ${x2} ${y2} Z`} fill={COLORS[i % COLORS.length]} stroke="#1b1130" strokeWidth="2" />
+                <path d={`M150 150 L${x1} ${y1} A${R} ${R} 0 0 1 ${x2} ${y2} Z`} fill={COLORS[i % COLORS.length]} stroke="#0a0a0a" strokeWidth="2" />
                 {/* Texto en dirección del radio, como en las ruletas de premios */}
                 <g transform={`rotate(${mid - 90} ${tx} ${ty})`}>
                   {v ? (
@@ -110,7 +110,7 @@ export function Wheel({
             const [x, y] = polar(i * 15, 146);
             return <circle key={i} cx={x} cy={y} r="2.6" fill={i % 2 ? "#ffb800" : "#ffffff"} className={spinning ? "animate-pulse" : ""} />;
           })}
-          <circle cx="150" cy="150" r="30" fill="#1b1130" stroke="#e11d2e" strokeWidth="5" />
+          <circle cx="150" cy="150" r="30" fill="#0a0a0a" stroke="#e11d2e" strokeWidth="5" />
         </svg>
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <Gift className="h-7 w-7 text-sol" />

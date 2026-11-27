@@ -35,7 +35,7 @@ export function Showcase() {
                 <span className="flex h-7 w-7 items-center justify-center rounded-full bg-rosa-50 text-[14px]">{c.emoji}</span>
                 {c.type}
               </figcaption>
-              <div className="overflow-hidden rounded-[1.4rem] bg-black p-1 shadow-[0_18px_40px_-20px_rgba(27,17,48,0.6)]">
+              <div className="overflow-hidden rounded-[1.4rem] bg-black p-1 shadow-[0_18px_40px_-20px_rgba(10,10,10,0.6)]">
                 <div className="relative aspect-[9/16] overflow-hidden rounded-[1.2rem]">
                   {/* eslint-disable @next/next/no-img-element */}
                   {[c.img, c.img2].map((src, k) => (
